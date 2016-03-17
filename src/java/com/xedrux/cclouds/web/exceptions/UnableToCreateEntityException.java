@@ -7,17 +7,16 @@ package com.xedrux.cclouds.web.exceptions;
 
 import java.util.List;
 import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 
 /**
  *
  * @author Admin
  */
-public class UnableToCreateUserException extends Exception{
+public class UnableToCreateEntityException extends Exception{
 
     List<FieldError> list;
 
-    public UnableToCreateUserException(String message, List<FieldError> list) {
+    public UnableToCreateEntityException(String message, List<FieldError> list) {
         super(message);
         this.list=list;
     }
@@ -26,7 +25,7 @@ public class UnableToCreateUserException extends Exception{
         return list;
     }
 
-    public UnableToCreateUserException(String message) {
+    public UnableToCreateEntityException(String message) {
         super(message);
     }
 }

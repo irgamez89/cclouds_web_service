@@ -1,38 +1,33 @@
 package com.xedrux.cclouds.web.entities;
 
-import java.util.Collection;
-import javax.xml.bind.annotation.XmlTransient;
-import org.codehaus.jackson.annotate.JsonIgnore;
-
 /**
  *
  * @author Isidro Rodríguez Gamez
  */
-//@Table(name = "cclouds_rol")
 public class CcloudsRol {
-    private Integer idRol;
+    private Long idRol;
     private String name;
     private String description;
-    private Collection<CcloudsRolModule> ccloudsRolModuleCollection;
 
     public CcloudsRol() {
     }
 
-    public CcloudsRol(Integer idRol, String name, String description) {
+    public CcloudsRol(Long idRol, String name, String description){
         this.idRol = idRol;
         this.name = name;
         this.description = description;
+
     }
     
-    public CcloudsRol(Integer idRol) {
+    public CcloudsRol(Long idRol) {
         this.idRol = idRol;
     }
 
-    public Integer getIdRol() {
+    public Long getIdRol() {
         return idRol;
     }
 
-    public void setIdRol(Integer idRol) {
+    public void setIdRol(Long idRol) {
         this.idRol = idRol;
     }
 
@@ -40,7 +35,7 @@ public class CcloudsRol {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name) throws Exception {
         this.name = name;
     }
 
@@ -50,16 +45,6 @@ public class CcloudsRol {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @XmlTransient
-    @JsonIgnore
-    public Collection<CcloudsRolModule> getCcloudsRolModuleCollection() {
-        return ccloudsRolModuleCollection;
-    }
-
-    public void setCcloudsRolModuleCollection(Collection<CcloudsRolModule> ccloudsRolModuleCollection) {
-        this.ccloudsRolModuleCollection = ccloudsRolModuleCollection;
     }
 
     @Override

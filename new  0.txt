@@ -1,0 +1,9 @@
+apachectl stop
+
+/home/glassfish/glassfish4/bin/asadmin delete-domain --domain-dir /home/glassfish/glassfish4/ domain1
+
+/home/glassfish/glassfish4/bin/asadmin create-domain --adminport 4848 --instanceport 80 domain2
+
+/home/glassfish/glassfish4/bin/asadmin --host=localhost --port=4848 --user=admin
+--secure=false
+deploy --force=true --name=cclouds --contextroot=/cclouds /root/cclouds.war

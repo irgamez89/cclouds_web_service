@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.entities;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -8,52 +9,49 @@ import javax.validation.constraints.Size;
  *
  * @author Isidro Rodríguez Gamez
  */
-//@Table(name = "cclouds_logs")
-public class CcloudsLogs {
-    private Integer idLog;
+public class CcloudsLogs implements Serializable {
+    private Long idLog;
     @NotNull
-    private Date createDate;
-    @NotNull
-    private Date updateDate;
+    private Date lastDate;
     @Size(max = 255)
     private String accion;
-    private Integer idTable;
-
+    @Size(max = 255)
+    private String tableName;
+    private long idUser;
     public CcloudsLogs() {
     }
 
-    public CcloudsLogs(Integer idLog) {
+    public CcloudsLogs(Long idLog,long idUser, Date lastDate, String accion, String tableName) {
         this.idLog = idLog;
+        this.idUser = idUser;
+        this.lastDate = lastDate;
+        this.accion = accion;
+        this.tableName = tableName;
     }
 
-    public CcloudsLogs(Integer idLog, Date createDate, Date updateDate) {
-        this.idLog = idLog;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-    }
-
-    public Integer getIdLog() {
+    public Long getIdLog() {
         return idLog;
     }
 
-    public void setIdLog(Integer idLog) {
+    public void setIdLog(Long idLog) {
         this.idLog = idLog;
     }
 
-    public Date getCreateDate() {
-        return createDate;
+    public long getIdUser() {
+        return idUser;
     }
 
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
+    public void setIdUser(long idUser) {
+        this.idUser = idUser;
     }
 
-    public Date getUpdateDate() {
-        return updateDate;
+
+    public Date getLastDate() {
+        return lastDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
-        this.updateDate = updateDate;
+    public void setLastDate(Date lastDate) {
+        this.lastDate = lastDate;
     }
 
     public String getAccion() {
@@ -64,12 +62,12 @@ public class CcloudsLogs {
         this.accion = accion;
     }
 
-    public Integer getIdTable() {
-        return idTable;
+    public String getTableName() {
+        return tableName;
     }
 
-    public void setIdTable(Integer idTable) {
-        this.idTable = idTable;
+    public void setTableName(String tableName) {
+        this.tableName = tableName;
     }
 
     @Override

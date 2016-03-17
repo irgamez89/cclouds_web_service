@@ -7,11 +7,11 @@ package com.xedrux.cclouds.web.exceptions;
 
 /**
  *
- * @author Admin
+ * @author Isidro Rodríguez Gamez
  */
-public class UserNotFoundException extends Exception{
-
-    public UserNotFoundException(String string) {
+public class UnableToInsertEntityException extends Exception{
+    
+    public UnableToInsertEntityException(String string) {
         super(string);
     }
     

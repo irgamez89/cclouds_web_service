@@ -20,7 +20,8 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
     
     <context:mbean-export/>
-    <mvc:annotation-driven/>
+    
+    <!--<mvc:annotation-driven/>-->
     <context:component-scan base-package="com.xedrux.cclouds.web" />
 
     
@@ -44,20 +45,49 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean id="RolDAO" class="com.xedrux.cclouds.web.dao.RolDAO">
         <property name="dataSource" ref="MydataSource"/>
     </bean>
+    <bean id="ModuleDAO" class="com.xedrux.cclouds.web.dao.ModuleDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="LogDAO" class="com.xedrux.cclouds.web.dao.LogDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="RolOptionDAO" class="com.xedrux.cclouds.web.dao.RolOptionDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="CountryDAO" class="com.xedrux.cclouds.web.dao.CountryDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="ProvinceDAO" class="com.xedrux.cclouds.web.dao.ProvinceDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="CityDAO" class="com.xedrux.cclouds.web.dao.CityDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="ParroquiaDAO" class="com.xedrux.cclouds.web.dao.ParroquiaDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="OptionDAO" class="com.xedrux.cclouds.web.dao.OptionDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
     <bean id="transactionManager" 
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="MydataSource"/>
     </bean>
 
     <aop:config>
-        <aop:advisor pointcut="execution( * com.xedrux.cclouds.web.dao.UserDAO.*(..))" advice-ref="txAdvice"/>
+        <aop:advisor pointcut="execution( * com.xedrux.cclouds.web.controllers.*.*(..))" advice-ref="txAdvice"/>
     </aop:config>
 
     <tx:advice id="txAdvice"  transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="*" propagation="REQUIRES_NEW"/>
+            <tx:method name="*" propagation="REQUIRES_NEW" rollback-for="UnableToCreateEntityException"/>
             <!--tx:method name="*" read-only="true"/-->
         </tx:attributes>
     </tx:advice>
-    
+    <bean id="myPermissionEvaluator" class="com.xedrux.cclouds.web.springconfig.CcloudsPermissionEvaluator">
+        
+    </bean>
+    <bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
+        <property name="permissionEvaluator" ref="myPermissionEvaluator"/>
+    </bean>
 </beans>

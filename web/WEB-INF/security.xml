@@ -6,7 +6,6 @@
 		   http://www.springframework.org/schema/security
 		   http://www.springframework.org/schema/security/spring-security.xsd">
 	
-    <!--<http pattern="/resources/**" security="none"/>-->
     
     <!--<http pattern="/accountDisabled*" security="none"/>-->
 <!--    <http pattern="/usuario/**"  >
@@ -21,20 +20,22 @@
     </http>-->
     <http >
         <anonymous enabled="true" />
-       <!--<intercept-url pattern="/mylogin*" access="hasRole('ANONYMOUS')" />-->
-        <intercept-url pattern="/**" access="hasRole('USER')"  />
-        <!--<form-login login-page="/mylogin"/>-->
-        <form-login />
+       <intercept-url pattern="/mylogin*" access="hasRole('ANONYMOUS')" />
+        <form-login login-page="/mylogin" authentication-failure-url="/mylogin?error"/>
+       <intercept-url pattern="/**" access="authenticated"  />
+        <!--<form-login />-->
         <logout delete-cookies="JSESSIONID"/>
         <!-- <port-mappings>
-	<port-mapping  http="8080" https="8181"/>
+	<port-mapping  http="80" https="8181"/>
         </port-mappings> -->
         <csrf disabled="true"/> 
         <!--csrf disablement is temporal-->
     </http>
-
+<beans:bean name="bcryptEncoder"
+	class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
     <authentication-manager>
         <authentication-provider>
+            <password-encoder ref="bcryptEncoder"/>
             <jdbc-user-service data-source-ref="MydataSource"
                            users-by-username-query=
             "select username, password, enabled from cclouds_usuario where username=?"
@@ -42,5 +43,13 @@
             "select username,name from cclouds_usuario, cclouds_rol  where cclouds_rol.id_rol=cclouds_usuario.id_rol and username=?" />
         </authentication-provider>
     </authentication-manager>
+    
+    <global-method-security pre-post-annotations="enabled">
+<expression-handler ref="expressionHandler"/>
+<!--<protect-pointcut expression="execution(* com.xedrux.cclouds.web.controllers.*.*(..))"
+	   access="hasPermission('a','admin')"/>-->
+</global-method-security>
+
+
     
 </beans:beans>

@@ -1,10 +1,10 @@
 package com.xedrux.cclouds.web.entities;
 
-import com.xedrux.cclouds.web.exceptions.UnableToCreateUserException;
+import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 /**
  *
@@ -18,7 +18,6 @@ public class CcloudsUsuario {
     @NotNull
     @Size(min = 1, max = 25)
     private String username;
-    @NotNull
     @Size(min = 1, max = 255)
     private String password;
     @Size(max = 255)
@@ -34,20 +33,17 @@ public class CcloudsUsuario {
     private String sex;
     @NotNull
     private Date dateBirth;
-    @NotNull
     @Size(min = 1, max = 50)
     private String dbHash;
-    @NotNull
     @Size(min = 1, max = 10)
     private String plainTextPassword;
-    @Size(max = 50)
-    private String country;
-    @Size(max = 50)
-    private String province;
-    @Size(max = 50)
-    private String city;
+    private Long parroquia;
+    @NotNull
+    private boolean enabled;
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
 
     public CcloudsUsuario() {
+        
     }
 
     public CcloudsUsuario(long idUser) {
@@ -57,7 +53,7 @@ public class CcloudsUsuario {
     public CcloudsUsuario(long idUser, long idRol, String username,
             String password, Date dateBirth, String dbHash,
             String plainTextPassword) {
-        
+
         this.idUser = idUser;
         this.idRol = idRol;
         this.username = username;
@@ -67,16 +63,18 @@ public class CcloudsUsuario {
         this.plainTextPassword = plainTextPassword;
     }
 
-    private void checkEmailSyntax(String email) throws UnableToCreateUserException{
-        if(!email.matches("^[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z_+])*@([0-9a-zA-Z][-\\w]*" +
-                "[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9}$"))
-            throw new UnableToCreateUserException("Invalid email address");
-    } 
+    private void checkEmailSyntax(String email) throws UnableToCreateEntityException {
+        if (!email.matches("^[0-9a-zA-Z]([-.\\w]*[0-9a-zA-Z_+])*@([0-9a-zA-Z][-\\w]*"
+                + "[0-9a-zA-Z]\\.)+[a-zA-Z]{2,9}$")) {
+            throw new UnableToCreateEntityException("Invalid email address");
+        }
+    }
+
     public CcloudsUsuario(long idUser, long idRol, String username,
             String password, String passwordResetToken, String phoneNumber,
             String userEmail, String firstName, String lastName, String sex,
             Date dateBirth, String dbHash, String plainTextPassword,
-            String country, String province, String city) throws UnableToCreateUserException {
+            Long parroquia, boolean enabled) throws UnableToCreateEntityException {
         checkEmailSyntax(userEmail);
         this.idUser = idUser;
         this.idRol = idRol;
@@ -91,9 +89,8 @@ public class CcloudsUsuario {
         this.dateBirth = dateBirth;
         this.dbHash = dbHash;
         this.plainTextPassword = plainTextPassword;
-        this.country = country;
-        this.province = province;
-        this.city = city;
+        this.parroquia = parroquia;
+        this.enabled = enabled;
     }
 
     public long getIdUser() {
@@ -126,7 +123,7 @@ public class CcloudsUsuario {
 
     public void setPassword(String password) {
         this.password = password;
-    }
+    }   
 
     public String getPasswordResetToken() {
         return passwordResetToken;
@@ -148,7 +145,7 @@ public class CcloudsUsuario {
         return userEmail;
     }
 
-    public void setUserEmail(String userEmail) throws UnableToCreateUserException {
+    public void setUserEmail(String userEmail) throws UnableToCreateEntityException {
         checkEmailSyntax(userEmail);
         this.userEmail = userEmail;
     }
@@ -177,8 +174,8 @@ public class CcloudsUsuario {
         this.sex = sex;
     }
 
-    public Date getDateBirth() {
-        return dateBirth;
+    public String getDateBirth() {
+        return dateFormatter.format(dateBirth);
     }
 
     public void setDateBirth(Date dateBirth) {
@@ -201,28 +198,20 @@ public class CcloudsUsuario {
         this.plainTextPassword = plainTextPassword;
     }
 
-    public String getCountry() {
-        return country;
+    public void setParroquia(Long parroquia) {
+        this.parroquia = parroquia;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public Long getParroquia() {
+        return parroquia;
     }
 
-    public String getProvince() {
-        return province;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public void setProvince(String province) {
-        this.province = province;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
+    public boolean isEnabled() {
+        return enabled;
     }
 
     @Override
