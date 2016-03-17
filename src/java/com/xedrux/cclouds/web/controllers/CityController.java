@@ -2,7 +2,6 @@ package com.xedrux.cclouds.web.controllers;
 
 import com.xedrux.cclouds.web.dao.CityDAO;
 import com.xedrux.cclouds.web.entities.CcloudsCity;
-import com.xedrux.cclouds.web.entities.CcloudsProvince;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
 import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;
 import java.util.Collection;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *

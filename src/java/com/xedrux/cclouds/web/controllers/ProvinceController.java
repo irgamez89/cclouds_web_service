@@ -1,7 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
 import com.xedrux.cclouds.web.dao.ProvinceDAO;
-import com.xedrux.cclouds.web.entities.CcloudsCountry;
 import com.xedrux.cclouds.web.entities.CcloudsProvince;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
 import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;

@@ -1,7 +1,6 @@
 package com.xedrux.cclouds.web.dao;
 
 import com.xedrux.cclouds.web.entities.CcloudsCity;
-import com.xedrux.cclouds.web.entities.CcloudsProvince;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
