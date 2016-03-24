@@ -1,7 +1,12 @@
 package com.xedrux.cclouds.web.controllers;
 
 import com.xedrux.cclouds.web.dao.CityDAO;
+import com.xedrux.cclouds.web.dao.CountryDAO;
+import com.xedrux.cclouds.web.dao.ProvinceDAO;
 import com.xedrux.cclouds.web.entities.CcloudsCity;
+import com.xedrux.cclouds.web.entities.CcloudsCountry;
+import com.xedrux.cclouds.web.entities.CcloudsParroquia;
+import com.xedrux.cclouds.web.entities.CcloudsProvince;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
 import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;
 import java.util.Collection;
@@ -29,6 +34,10 @@ public class CityController {
 
     @Autowired
     CityDAO cityDAO;
+    @Autowired
+    ProvinceDAO provinceDAO;
+    @Autowired
+    CountryDAO countryDAO;
 
     public void setCityDAO(CityDAO cityDAO) {
         this.cityDAO = cityDAO;
@@ -121,4 +130,31 @@ public class CityController {
                     "Couldn't delete. There is no city with id:" + id);
         }
     }
+    
+    
+     @RequestMapping(value = "/detailed/id={id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public HashMap<String, Object> getCityProvinceAndCountry(
+            @ModelAttribute("id") Long id)
+            throws EntityNotFoundException {
+        HashMap<String, Object> response = new HashMap<>();
+        CcloudsCity city = cityDAO.getCity(id);
+        if (city != null) {
+            CcloudsProvince province = provinceDAO.getProvince(city.getIdProvince());
+            List<CcloudsCountry> countries = countryDAO.getAllCountries();
+            List<CcloudsCity> cities = cityDAO.getAllCitiesFrom(province.getIdProvince());
+            CcloudsCountry country = countryDAO.getCountry(province.getIdCountry());
+            List<CcloudsProvince> provinces = provinceDAO.getAllProvincesFrom(country.getIdCountry());
+            response.put("country", country);
+            response.put("province", province);
+            response.put("city", city);
+            response.put("cities", cities);
+            response.put("provinces", provinces);
+            response.put("countries", countryDAO.getAllCountries());
+        } else {
+            throw new EntityNotFoundException(MESSAGE + id);
+        }
+        return response;
+    }
+     final String MESSAGE = "No hay ciudad con id: ";
 }

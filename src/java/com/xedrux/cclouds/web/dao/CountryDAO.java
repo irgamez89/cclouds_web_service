@@ -110,7 +110,8 @@ public class CountryDAO {
                             country = new CcloudsCountry(
                                     rs.getLong(ID),
                                     rs.getString(CODE),
-                                    rs.getString(NAME)
+                                    rs.getString(NAME),
+                                    rs.getString(DESCRIPTION)
                             );
                         
                         return country;

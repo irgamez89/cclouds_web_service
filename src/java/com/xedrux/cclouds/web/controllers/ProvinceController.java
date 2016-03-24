@@ -1,6 +1,10 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CountryDAO;
 import com.xedrux.cclouds.web.dao.ProvinceDAO;
+import com.xedrux.cclouds.web.entities.CcloudsCity;
+import com.xedrux.cclouds.web.entities.CcloudsCountry;
+import com.xedrux.cclouds.web.entities.CcloudsParroquia;
 import com.xedrux.cclouds.web.entities.CcloudsProvince;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
 import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;
@@ -29,6 +33,8 @@ public class ProvinceController {
 
     @Autowired
     ProvinceDAO provinceDAO;
+    @Autowired
+    CountryDAO countryDAO;
 
     public void setProvinceDAO(ProvinceDAO provinceDAO) {
         this.provinceDAO = provinceDAO;
@@ -125,5 +131,27 @@ public class ProvinceController {
                     "Couldn't delete. There is no province with id:" + id);
         }
     }
+    
+    @RequestMapping(value = "/detailed/id={id}", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public HashMap<String, Object> getProvinceAndCountry(
+            @ModelAttribute("id") Long id)
+            throws EntityNotFoundException {
+        HashMap<String, Object> response = new HashMap<>();
+        CcloudsProvince province = provinceDAO.getProvince(id);
+        if (province != null) {
+            CcloudsCountry country = countryDAO.getCountry(province.getIdCountry());
+            List<CcloudsCountry> countries = countryDAO.getAllCountries();
+            
+            response.put("country", country);
+            response.put("province", province);
+            response.put("countries", countries);
+        } else {
+            throw new EntityNotFoundException(MESSAGE + id);
+        }
+        return response;
+    }
+    
+    final String MESSAGE = "No hay provincias con id: ";    
 
 }

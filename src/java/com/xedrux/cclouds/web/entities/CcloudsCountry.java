@@ -30,10 +30,11 @@ public class CcloudsCountry implements Serializable {
 
     
 
-    public CcloudsCountry(Long idCountry, String codeCountry, String nameCountry) {
+    public CcloudsCountry(Long idCountry, String codeCountry, String nameCountry, String desc) {
         this.idCountry = idCountry;
         this.codeCountry = codeCountry;
         this.nameCountry = nameCountry;
+        this.descriptionCountry = desc;
     }
 
     public void setIdCountry(Long idCountry) {
