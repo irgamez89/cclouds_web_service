@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
 /**
  *
  * @author Isidro Rodríguez Gamez
@@ -34,7 +35,7 @@ public class UserController {
 
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
-    
+
     public void setUserDAO(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
@@ -42,14 +43,13 @@ public class UserController {
     public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
-    
-    
+
     @PreAuthorize("hasPermission('', 'test_option')")
     @RequestMapping("/test")
     public ResponseEntity<String> testMethod() {
-        return new ResponseEntity<>("Hello world",HttpStatus.CREATED);
+        return new ResponseEntity<>("Hello world", HttpStatus.CREATED);
     }
-    
+
     @RequestMapping(value = "/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getUser(@ModelAttribute("id") Long id)
@@ -63,11 +63,10 @@ public class UserController {
         }
         return response;
     }
-    
+
     @RequestMapping(value = "/username={username}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public HashMap<String, Object> getUserByUsername(@ModelAttribute("username")
-                                                     String username)
+    public HashMap<String, Object> getUserByUsername(@ModelAttribute("username") String username)
             throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         CcloudsUsuario user = userDAO.findUsuarioByUsername(username);
@@ -76,7 +75,7 @@ public class UserController {
 
         } else {
             throw new EntityNotFoundException("There is not any user with "
-                    + "username "+ username);
+                    + "username " + username);
         }
         return response;
     }
@@ -95,8 +94,9 @@ public class UserController {
                     result.getFieldErrors());
         } else {
             user.setIdUser(id);
-            if(user.getPassword()!=null)
+            if (user.getPassword() != null) {
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
+            }
             if (userDAO.updateUser(user)) {
                 response.put("success", true);
             } else {
@@ -113,12 +113,14 @@ public class UserController {
         HashMap<String, Object> response = new HashMap<>();
         response.put("users", users);
         return response;
+
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> insertUser(
+    public HashMap<String, Object> insertUser(
             @RequestBody @Valid CcloudsUsuario user,
             BindingResult result) throws UnableToCreateEntityException {
         HashMap<String, Object> response = new HashMap<>();
@@ -128,13 +130,9 @@ public class UserController {
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             long id = userDAO.insertUser(user);
-            if(id<0){
-                response.put("error", "username already exists");
-                return new ResponseEntity<>(response,HttpStatus.CONFLICT);
-            }else
-                response.put("userId", id);
+            response.put("userId", id);
         }
-        return new ResponseEntity<>(response,HttpStatus.CREATED);
+        return response;
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -145,14 +143,14 @@ public class UserController {
             throw new EntityNotFoundException(MESSAGE + id);
         }
     }
-    
+
     @RequestMapping(value = "/myself", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public CcloudsUsuario getCurrentUser(Principal user){
+    public CcloudsUsuario getCurrentUser(Principal user) {
         String username = user.getName();
         return userDAO.findUsuarioByUsername(username);
     }
-    
+
     private final String MESSAGE = "There is not any user with id: ";
 
 }

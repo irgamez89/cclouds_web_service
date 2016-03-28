@@ -18,7 +18,7 @@ public class CcloudsCountry implements Serializable {
     @NotNull
     @Size(min = 1, max = 50)
     private String nameCountry;
-    @Size(max = 10)
+    @Size(max = 50)
     private String descriptionCountry;
 
     public CcloudsCountry() {
@@ -28,13 +28,11 @@ public class CcloudsCountry implements Serializable {
         this.idCountry = idCountry;
     }
 
-    
-
-    public CcloudsCountry(Long idCountry, String codeCountry, String nameCountry, String desc) {
+    public CcloudsCountry(Long idCountry, String codeCountry, String nameCountry, String descriptionCountry) {
         this.idCountry = idCountry;
         this.codeCountry = codeCountry;
         this.nameCountry = nameCountry;
-        this.descriptionCountry = desc;
+        this.descriptionCountry = descriptionCountry;
     }
 
     public void setIdCountry(Long idCountry) {

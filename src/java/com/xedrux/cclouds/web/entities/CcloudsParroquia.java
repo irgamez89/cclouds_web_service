@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xedrux.cclouds.web.entities;
 
 import java.io.Serializable;
@@ -15,25 +10,14 @@ import javax.validation.constraints.Size;
  */
 public class CcloudsParroquia implements Serializable {
     private static final long serialVersionUID = 1L;
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Basic(optional = false)
-//    @Column(name = "id_parroquia")
     private Long idParroquia;
-//    @Basic(optional = false)
     @NotNull
-//    @Column(name = "code_parroquia")
     private int codeParroquia;
-//    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
-//    @Column(name = "name_parroquia")
     private String nameParroquia;
     @Size(max = 50)
-//    @Column(name = "description_parroquia")
     private String descriptionParroquia;
-//    @JoinColumn(name = "id_city", referencedColumnName = "id_city")
-//    @ManyToOne(optional = false)
     private long idCity;
 
     public CcloudsParroquia() {

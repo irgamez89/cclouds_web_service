@@ -10,12 +10,12 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -31,11 +31,11 @@ public class ModuleController {
     public void setModuleDAO(ModuleDAO DAO) {
         this.moduleDAO = DAO;
     }
-    
+    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> insertModule(
+    public HashMap<String, Object> insertModule(
             @RequestBody @Valid CcloudsModule module,
             BindingResult result) throws UnableToCreateEntityException  {
         HashMap<String, Object> response = new HashMap<>();
@@ -44,13 +44,9 @@ public class ModuleController {
                     result.getFieldErrors());
         } else {
             long id = moduleDAO.insertModule(module);
-            if(id<0){
-                response.put("error", "module name already exists");
-                return new ResponseEntity<>(response,HttpStatus.CONFLICT);
-            }else
-                response.put("Id", id);
+            response.put("Id", id);
         }
-        return new ResponseEntity<>(response,HttpStatus.CREATED);
+        return response;
     }
     
     @RequestMapping(value = "/", method = RequestMethod.GET,
@@ -64,32 +60,29 @@ public class ModuleController {
     
     @RequestMapping(value = "/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> getModule(@ModelAttribute("id") Long id) {
+    public HashMap<String, Object> getModule(@ModelAttribute("id") Long id) throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         CcloudsModule module = moduleDAO.getModule(id);
         if (module != null) {
             response.put("module", module);
 
         } else {
-            response.put("message", "No hay módulo con id " + id);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException("No hay módulo con id " + id);
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return response;
     }
     
     @RequestMapping(value = "/name={name}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> getModuleByName(@ModelAttribute("name") String name) {
+    public HashMap<String, Object> getModuleByName(@ModelAttribute("name") String name) throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         CcloudsModule module = moduleDAO.findModuleByName(name);
         if (module != null) {
             response.put("module", module);
         } else {
-            response.put("message", "No hay módulo con nombre " + name);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-
+            throw new EntityNotFoundException("No hay módulo con nombre " + name);
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return response;
     }
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,

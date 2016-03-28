@@ -55,19 +55,16 @@ ModuleDAO instance;
                 + " %s )"
                 + "VALUES (?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, NAME,DESCRIPTION);
-        try{
         dataSource.update((Connection connection) -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID_MODULE});
             ps.setObject(1, module.getName());
             ps.setObject(2, module.getDescription());
             return ps;
         }, keyHolder);
-        }catch(DataAccessException e){
-            e.printStackTrace();
-            return -1;
-        }
+        
         return keyHolder.getKey().longValue();
     }
+    
     public boolean updateModule(CcloudsModule module) {
         String sql = "UPDATE %s SET "
                 + "%s=?, %s=? WHERE "

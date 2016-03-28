@@ -24,7 +24,6 @@ public class CcloudsEmpresa implements Serializable {
     private String esloganEmpresa;
     @Size(max = 500)
     private String imagenLogoEmpresa;
-//    private Collection<CcloudsSubEmpresa> ccloudsSubEmpresaCollection;
 
     public CcloudsEmpresa() {
     }

@@ -1,12 +1,16 @@
 package com.xedrux.cclouds.web.entities;
 
+import javax.validation.constraints.Size;
+
 /**
  *
  * @author Isidro Rodríguez Gamez
  */
 public class CcloudsRol {
     private Long idRol;
+    @Size(max=255)
     private String name;
+    @Size(max=255)
     private String description;
 
     public CcloudsRol() {

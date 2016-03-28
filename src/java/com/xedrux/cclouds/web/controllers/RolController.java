@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,32 +53,29 @@ public class RolController {
 
     @RequestMapping(value = "/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> getRol(@ModelAttribute("id") Long id) {
+    public HashMap<String, Object> getRol(@ModelAttribute("id") Long id) throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         CcloudsRol rol = rolDAO.getRol(id);
-        if (rol != null) {
+        if (rol != null) 
             response.put("rol", rol);
-        } else {
-            response.put("message", "No hay rol con id " + id);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        else
+            throw new EntityNotFoundException("No hay rol con id " + id);
+        return response;
     }
 
     @RequestMapping(value = "/name={name}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<HashMap<String, Object>> getRolByName(@ModelAttribute("name") String name) {
+    public HashMap<String, Object> getRolByName(@ModelAttribute("name") String name) throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         CcloudsRol rol = rolDAO.findRolByName(name);
         if (rol != null) {
             response.put("rol", rol);
 
         } else {
-            response.put("message", "No hay rol con nombre " + name);
-            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+            throw new EntityNotFoundException("No hay rol con nombre " + name);
 
         }
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return response;
     }
     
     @ResponseStatus(HttpStatus.CREATED)

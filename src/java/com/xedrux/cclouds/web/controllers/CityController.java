@@ -5,7 +5,6 @@ import com.xedrux.cclouds.web.dao.CountryDAO;
 import com.xedrux.cclouds.web.dao.ProvinceDAO;
 import com.xedrux.cclouds.web.entities.CcloudsCity;
 import com.xedrux.cclouds.web.entities.CcloudsCountry;
-import com.xedrux.cclouds.web.entities.CcloudsParroquia;
 import com.xedrux.cclouds.web.entities.CcloudsProvince;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
 import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;
