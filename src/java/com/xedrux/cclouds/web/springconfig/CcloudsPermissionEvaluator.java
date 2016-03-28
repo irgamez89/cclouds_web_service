@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.springconfig;
 
+import com.xedrux.cclouds.web.dao.AdmModuloDAO;
 import com.xedrux.cclouds.web.dao.OptionDAO;
 import com.xedrux.cclouds.web.dao.RolOptionDAO;
 import com.xedrux.cclouds.web.dao.UserDAO;
@@ -18,7 +19,7 @@ public class CcloudsPermissionEvaluator implements PermissionEvaluator {
     UserDAO userDAO;
     
     @Autowired
-    OptionDAO optionDAO;
+    AdmModuloDAO admModuloDAO;
     
     @Autowired
     RolOptionDAO roloptionDAO;
@@ -27,8 +28,8 @@ public class CcloudsPermissionEvaluator implements PermissionEvaluator {
         this.userDAO = userDAO;
     }
 
-    public void setOptionDAO(OptionDAO optionDAO) {
-        this.optionDAO = optionDAO;
+    public void setOptionDAO(AdmModuloDAO optionDAO) {
+        this.admModuloDAO = optionDAO;
     }
 
     public void setRoloptionDAO(RolOptionDAO roloptionDAO) {
@@ -39,7 +40,7 @@ public class CcloudsPermissionEvaluator implements PermissionEvaluator {
     public boolean hasPermission(Authentication a, Object o, Object o1) {
         long rol,option;
         rol=userDAO.findUsuarioByUsername(a.getName()).getIdRol();
-        option=optionDAO.findOptionByName(o1.toString()).getIdOption();
+        option=admModuloDAO.findOptionByName(o1.toString()).getId();
         return roloptionDAO.getRols4Option(option).contains(rol);
     }
 

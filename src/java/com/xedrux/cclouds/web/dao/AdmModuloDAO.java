@@ -1,6 +1,7 @@
 package com.xedrux.cclouds.web.dao;
 
 import com.xedrux.cclouds.web.entities.AdmModulo;
+import com.xedrux.cclouds.web.entities.CcloudsOptions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -43,6 +44,19 @@ public class AdmModuloDAO {
         }
 
     }
+    
+    public AdmModulo findOptionByName(String name) {
+        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + NAME + " = ?";
+        Object[] args = {name};
+        try {
+            AdmModulo option = dataSource.queryForObject(sql, args,
+                    new AdmModuloMapper());
+            return option;
+        } catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    
 
     private final class AdmModuloMapper implements RowMapper<AdmModulo> {
 

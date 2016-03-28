@@ -18,6 +18,8 @@
         
         <http-basic entry-point-ref="failedAuthenticationChecker"/>
     </http>-->
+    <beans:bean name="accessDeniedHandler" 
+                 class="com.xedrux.cclouds.web.springconfig.MyAccessDeniedHandler"/>
     <http >
         <anonymous enabled="true" />
        <intercept-url pattern="/mylogin*" access="hasRole('ANONYMOUS')" />
@@ -28,6 +30,7 @@
         <!-- <port-mappings>
 	<port-mapping  http="80" https="8181"/>
         </port-mappings> -->
+        <access-denied-handler ref="accessDeniedHandler"/>
         <csrf disabled="true"/> 
         <!--csrf disablement is temporal-->
     </http>

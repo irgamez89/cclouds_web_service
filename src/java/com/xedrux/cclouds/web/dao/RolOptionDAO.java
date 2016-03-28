@@ -129,7 +129,7 @@ public class RolOptionDAO {
             return rm;
         }
     }
-    String TABLE_NAME = "cclouds_rol_opciones";
+    String TABLE_NAME = "cclouds_rol_adm";
     String ID = "id";
     String ID_ROL = "id_rol";
     String ID_OPTIONS = "id_options";

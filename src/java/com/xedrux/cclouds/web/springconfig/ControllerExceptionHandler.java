@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.DataIntegrityViolationException;
 
 /**
  *This class contains all methods that hanldes exceptions thrown in all
@@ -35,6 +36,15 @@ public class ControllerExceptionHandler {
     @ResponseBody
     public HashMap<String, Object> handleDuplicateKeyException(
             DuplicateKeyException exception) {
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("message", exception.getMessage());
+        return response;
+    }
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    @ResponseBody
+    public HashMap<String, Object> handleException(
+            DataIntegrityViolationException exception) {
         HashMap<String, Object> response = new HashMap<>();
         response.put("message", exception.getMessage());
         return response;

@@ -44,7 +44,7 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
-    @PreAuthorize("hasPermission('', 'test_option')")
+    @PreAuthorize("hasPermission('', 'Adicionar Usuario')")
     @RequestMapping("/test")
     public ResponseEntity<String> testMethod() {
         return new ResponseEntity<>("Hello world", HttpStatus.CREATED);
@@ -135,6 +135,7 @@ public class UserController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Eliminar Usuario')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public void deleteUser(@ModelAttribute("id") long id) throws
