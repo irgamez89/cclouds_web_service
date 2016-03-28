@@ -69,7 +69,10 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean id="OptionDAO" class="com.xedrux.cclouds.web.dao.OptionDAO">
         <property name="dataSource" ref="MydataSource"/>
     </bean>
-	<bean id="AdmModuloDAO" class="com.xedrux.cclouds.web.dao.AdmModuloDAO">
+    <bean id="AdmModuloDAO" class="com.xedrux.cclouds.web.dao.AdmModuloDAO">
+        <property name="dataSource" ref="MydataSource"/>
+    </bean>
+    <bean id="SexDAO" class="com.xedrux.cclouds.web.dao.SexDAO">
         <property name="dataSource" ref="MydataSource"/>
     </bean>
     <bean id="transactionManager" 
