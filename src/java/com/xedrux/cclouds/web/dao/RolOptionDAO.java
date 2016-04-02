@@ -44,17 +44,14 @@ public class RolOptionDAO {
                 + "VALUES (?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, ID_ROL,
                 ID_OPTIONS);
-        try{
+        
         dataSource.update((Connection connection) -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID});
             ps.setObject(1, roloption.getIdRol());
             ps.setObject(2, roloption.getIdOption());
             return ps;
         }, keyHolder);
-        }catch(DataAccessException e){
-            e.printStackTrace();
-            return -1;
-        }
+        
         return keyHolder.getKey().longValue();
     }
     

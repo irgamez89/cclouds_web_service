@@ -54,7 +54,6 @@ public class UserDAO {
         String INSERT_SQL = String.format(template, TABLE_NAME, ROL, USERNAME, PASSWORD, TOKEN, PHONE_NUMBER,
                 USER_EMAIL, FIRST_NAME, LAST_NAME, SEX, BIRTH_DATE, DB_HASH,
                 PLAIN_TEXT_PASSWORD,  PARROQUIA, ENABLED);
-        try{
         dataSource.update((Connection connection) -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID});
             ps.setObject(1, user.getIdRol());
@@ -73,10 +72,7 @@ public class UserDAO {
             ps.setObject(14, user.isEnabled());
             return ps;
         }, keyHolder);
-        }catch(DataAccessException e){
-            e.printStackTrace();
-            return -1;
-        }
+        
         return keyHolder.getKey().longValue();
     }
 

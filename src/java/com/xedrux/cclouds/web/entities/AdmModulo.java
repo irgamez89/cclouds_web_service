@@ -24,6 +24,7 @@ public class AdmModulo implements Serializable {
     private  String text;
     private  String icon;
     private  Integer tags;
+    private  boolean leaf;
     private  List<AdmModulo>children;
 
     public AdmModulo() {
@@ -33,7 +34,8 @@ public class AdmModulo implements Serializable {
         this.id = id;
     }
 
-    public AdmModulo(Long id, String name, String descripcion, Long idPadre ) {
+    public AdmModulo(Long id, String name, String descripcion, Long idPadre, 
+            boolean leaf ) {
         this.id = id;
         this.name = name;
         this.descripcion = descripcion;
@@ -41,6 +43,7 @@ public class AdmModulo implements Serializable {
         this.text = "";
         this.icon = "";
         this.tags = 0;
+        this.leaf = leaf;   
         this.children = new LinkedList<>();
     }
 
@@ -115,6 +118,15 @@ public class AdmModulo implements Serializable {
     public void setChildren(List<AdmModulo> children) {
         this.children = children;
     }
+
+    public void setLeaf(boolean leaf) {
+        this.leaf = leaf;
+    }
+
+    public boolean isLeaf() {
+        return leaf;
+    }
+    
     
     @Override
     public int hashCode() {

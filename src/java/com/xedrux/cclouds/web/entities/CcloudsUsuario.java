@@ -24,7 +24,8 @@ public class CcloudsUsuario {
     private String passwordResetToken;
     @Size(max = 255)
     private String phoneNumber;
-    @Size(max = 255)
+    @NotNull
+    @Size(min=2, max = 255)
     private String userEmail;
     @Size(max = 255)
     private String firstName;
@@ -146,6 +147,9 @@ public class CcloudsUsuario {
     }
 
     public void setUserEmail(String userEmail) throws UnableToCreateEntityException {
+        System.out.println("UserEmail en el set: "+userEmail);
+        System.out.println("UserEmail en el del objeto: "+this.userEmail);
+        System.out.println("This "+this);
         checkEmailSyntax(userEmail);
         this.userEmail = userEmail;
     }
@@ -214,9 +218,9 @@ public class CcloudsUsuario {
         return enabled;
     }
 
-    @Override
-    public String toString() {
-        return "test.CcloudsUsuario[ idUser=" + idUser + " ]";
-    }
+//    @Override
+//    public String toString() {
+//        return "test.CcloudsUsuario[ idUser=" + idUser + " ]";
+//    }
 
 }

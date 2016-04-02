@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -80,6 +81,7 @@ public class UserController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Modificar Usuario')")
     @RequestMapping(value = "/{IdUsuario}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -90,7 +92,7 @@ public class UserController {
             throws EntityNotFoundException, UnableToCreateEntityException {
         HashMap<String, Object> response = new HashMap<>();
         if (result.hasErrors()) {
-            throw new UnableToCreateEntityException("Some fields are wrong.",
+            throw new UnableToCreateEntityException("Hay campos incorrectos.",
                     result.getFieldErrors());
         } else {
             user.setIdUser(id);
@@ -116,16 +118,17 @@ public class UserController {
 
     }
 
+    @PreAuthorize("hasPermission('', 'Adicionar Usuario')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> insertUser(
-            @RequestBody @Valid CcloudsUsuario user,
+            @Valid @RequestBody CcloudsUsuario user,
             BindingResult result) throws UnableToCreateEntityException {
         HashMap<String, Object> response = new HashMap<>();
         if (result.hasErrors()) {
-            throw new UnableToCreateEntityException("Unable to create user.",
+            throw new UnableToCreateEntityException("Hay campos incorrectos.",
                     result.getFieldErrors());
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -57,7 +57,7 @@ public class OptionDAO {
                 + "VALUES (?, ?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, NAME,ID_MENU,
                 DESCRIPTION);
-        try{
+        
         dataSource.update((Connection connection) -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID});
             ps.setObject(1, option.getName());
@@ -65,10 +65,7 @@ public class OptionDAO {
             ps.setObject(3, option.getDescriptionOption());
             return ps;
         }, keyHolder);
-        }catch(DataAccessException e){
-            e.printStackTrace();
-            return -1;
-        }
+        
         return keyHolder.getKey().longValue();
     }
     public boolean updateOption(CcloudsOptions option) {

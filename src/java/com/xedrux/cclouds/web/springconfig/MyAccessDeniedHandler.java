@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.xedrux.cclouds.web.springconfig;
 
 import java.io.IOException;
@@ -22,8 +17,9 @@ public class MyAccessDeniedHandler implements AccessDeniedHandler{
     @Override
     public void handle(HttpServletRequest hsr, HttpServletResponse hsr1, AccessDeniedException ade) throws IOException, ServletException {
         hsr1.setStatus(HttpStatus.FORBIDDEN.value());
+        hsr1.setHeader("Content-Type", "application/json");
         hsr1.getWriter().write("{\"message\": \"Usted no tiene permiso para realizar "
-                + "la accion solicitada.\"}");
+                + "la acción solicitada.\"}");
     }
     
 }

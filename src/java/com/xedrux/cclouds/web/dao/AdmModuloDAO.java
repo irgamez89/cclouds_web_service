@@ -67,7 +67,8 @@ public class AdmModuloDAO {
                     rs.getLong(ID),
                     rs.getString(NAME),                   
                     rs.getString(DESCRIPTION),
-                    rs.getLong(ID_PADRE)
+                    rs.getLong(ID_PADRE),
+                    rs.getBoolean(IS_LEAF)
             );
             return modulo;
         }
@@ -77,4 +78,5 @@ public class AdmModuloDAO {
     final String NAME = "name";
     final String ID_PADRE = "id_padre";
     final String DESCRIPTION = "descripcion";
+    final String IS_LEAF = "is_leaf";
 }

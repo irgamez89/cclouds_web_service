@@ -37,6 +37,16 @@ public class AdmModuloController {
         response.put("tree", tree);
         return response;
     }
+    @RequestMapping(value = "/raw/", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public HashMap<String, Object> getListOfModules() {
+        List<AdmModulo> modulos = admModuloDAO.getAllModules();
+//        AdmModulo tree = appendChildNodes(modulos.get(0), modulos);
+        HashMap<String, Object> response = new HashMap<>();
+        response.put("modules", modulos);
+//        response.put("tree", tree);
+        return response;
+    }
 
     public AdmModulo appendChildNodes(AdmModulo node, List<AdmModulo> modulos) {
         List<AdmModulo> ramas = new LinkedList<>();
