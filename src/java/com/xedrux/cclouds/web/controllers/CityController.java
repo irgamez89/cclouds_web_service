@@ -41,7 +41,7 @@ public class CityController {
     public void setCityDAO(CityDAO cityDAO) {
         this.cityDAO = cityDAO;
     }
-
+    
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllCities() {
@@ -118,7 +118,7 @@ public class CityController {
         }
         return response;
     }
-
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteCity(@ModelAttribute("id") long id) throws

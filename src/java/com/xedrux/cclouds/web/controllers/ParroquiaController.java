@@ -57,8 +57,8 @@ public class ParroquiaController {
     public void setCountryDAO(CountryDAO countryDAO) {
         this.countryDAO = countryDAO;
     }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET,
+    
+     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllParroquias() {
         Collection<CcloudsParroquia> parroquias = parroquiaDAO.getAllParroquias();
@@ -167,7 +167,7 @@ public class ParroquiaController {
         }
         return response;
     }
-
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteParroquia(@ModelAttribute("id") long id) throws
