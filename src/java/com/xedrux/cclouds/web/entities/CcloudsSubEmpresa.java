@@ -9,6 +9,7 @@ import javax.validation.constraints.Size;
  * @author Admin
  */
 public class CcloudsSubEmpresa implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private Integer idSubEmpresa;
     @Size(max = 255)
@@ -24,12 +25,25 @@ public class CcloudsSubEmpresa implements Serializable {
     @Size(max = 500)
     private String imagenLogoSubEmpresa;
     private long idEmpresa;
-    
+
     public CcloudsSubEmpresa() {
     }
 
     public CcloudsSubEmpresa(Integer idSubEmpresa) {
         this.idSubEmpresa = idSubEmpresa;
+    }
+
+    public CcloudsSubEmpresa(Integer idSubEmpresa, String nombreSubEmpresa, String observacionSubEmpresa, Integer idTipoNegocioSubEmpresa, Integer idRepresentante1SubEmpresa, Integer idRepresentante2SubEmpresa, Date fechaConstitucionSubEmpresa, String esloganSubEmpresa, String imagenLogoSubEmpresa, long idEmpresa) {
+        this.idSubEmpresa = idSubEmpresa;
+        this.nombreSubEmpresa = nombreSubEmpresa;
+        this.observacionSubEmpresa = observacionSubEmpresa;
+        this.idTipoNegocioSubEmpresa = idTipoNegocioSubEmpresa;
+        this.idRepresentante1SubEmpresa = idRepresentante1SubEmpresa;
+        this.idRepresentante2SubEmpresa = idRepresentante2SubEmpresa;
+        this.fechaConstitucionSubEmpresa = fechaConstitucionSubEmpresa;
+        this.esloganSubEmpresa = esloganSubEmpresa;
+        this.imagenLogoSubEmpresa = imagenLogoSubEmpresa;
+        this.idEmpresa = idEmpresa;
     }
 
     public Integer getIdSubEmpresa() {
@@ -108,20 +122,6 @@ public class CcloudsSubEmpresa implements Serializable {
         return idEmpresa;
     }
 
-    public CcloudsSubEmpresa(Integer idSubEmpresa, String nombreSubEmpresa, String observacionSubEmpresa, Integer idTipoNegocioSubEmpresa, Integer idRepresentante1SubEmpresa, Integer idRepresentante2SubEmpresa, Date fechaConstitucionSubEmpresa, String esloganSubEmpresa, String imagenLogoSubEmpresa, long idEmpresa) {
-        this.idSubEmpresa = idSubEmpresa;
-        this.nombreSubEmpresa = nombreSubEmpresa;
-        this.observacionSubEmpresa = observacionSubEmpresa;
-        this.idTipoNegocioSubEmpresa = idTipoNegocioSubEmpresa;
-        this.idRepresentante1SubEmpresa = idRepresentante1SubEmpresa;
-        this.idRepresentante2SubEmpresa = idRepresentante2SubEmpresa;
-        this.fechaConstitucionSubEmpresa = fechaConstitucionSubEmpresa;
-        this.esloganSubEmpresa = esloganSubEmpresa;
-        this.imagenLogoSubEmpresa = imagenLogoSubEmpresa;
-        this.idEmpresa = idEmpresa;
-    }
-
-    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -146,5 +146,5 @@ public class CcloudsSubEmpresa implements Serializable {
     public String toString() {
         return "com.xedrux.cclouds.web.entities.CcloudsSubEmpresa[ idSubEmpresa=" + idSubEmpresa + " ]";
     }
-    
+
 }

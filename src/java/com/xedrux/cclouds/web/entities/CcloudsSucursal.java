@@ -10,6 +10,7 @@ import javax.validation.constraints.Size;
  * @author Admin
  */
 public class CcloudsSucursal implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @NotNull
     private Integer idSucursal;
@@ -21,6 +22,14 @@ public class CcloudsSucursal implements Serializable {
     private long idSubEmpresa;
 
     public CcloudsSucursal() {
+    }
+
+    public CcloudsSucursal(Integer idSucursal, String nombreSucursal, String observacionSucursal, Integer idRepresentanteSucursal, long idSubEmpresa) {
+        this.idSucursal = idSucursal;
+        this.nombreSucursal = nombreSucursal;
+        this.observacionSucursal = observacionSucursal;
+        this.idRepresentanteSucursal = idRepresentanteSucursal;
+        this.idSubEmpresa = idSubEmpresa;
     }
 
     public CcloudsSucursal(Integer idSucursal) {
@@ -47,6 +56,11 @@ public class CcloudsSucursal implements Serializable {
         return observacionSucursal;
     }
 
+    public long getIdSubEmpresa() {
+        return idSubEmpresa;
+    }
+    
+
     public void setObservacionSucursal(String observacionSucursal) {
         this.observacionSucursal = observacionSucursal;
     }
@@ -57,6 +71,10 @@ public class CcloudsSucursal implements Serializable {
 
     public void setIdRepresentanteSucursal(Integer idRepresentanteSucursal) {
         this.idRepresentanteSucursal = idRepresentanteSucursal;
+    }
+
+    public void setIdSubEmpresa(long idSubEmpresa) {
+        this.idSubEmpresa = idSubEmpresa;
     }
 
     @Override
@@ -83,5 +101,5 @@ public class CcloudsSucursal implements Serializable {
     public String toString() {
         return "com.xedrux.cclouds.web.entities.CcloudsSucursal[ idSucursal=" + idSucursal + " ]";
     }
-    
+
 }

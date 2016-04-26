@@ -24,6 +24,14 @@ public class CcloudsAgencia implements Serializable {
     public CcloudsAgencia() {
     }
 
+    public CcloudsAgencia(Long idAgencia, String nombreAgencia, String observacionAgencia, Integer idRepresentanteAgencia, long idSucursal) {
+        this.idAgencia = idAgencia;
+        this.nombreAgencia = nombreAgencia;
+        this.observacionAgencia = observacionAgencia;
+        this.idRepresentanteAgencia = idRepresentanteAgencia;
+        this.idSucursal = idSucursal;
+    }
+
     public Long getIdAgencia() {
         return idAgencia;
     }

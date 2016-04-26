@@ -13,7 +13,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -43,7 +42,6 @@ public class RolController {
         this.rolOptionDAO = rolOptionDAO;
     }
     
-    @PreAuthorize("hasPermission('', 'Listar Roles')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllRols() {
@@ -80,7 +78,6 @@ public class RolController {
         return response;
     }
     
-    @PreAuthorize("hasPermission('', 'Adicionar Rol')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -100,7 +97,6 @@ public class RolController {
         return response;
     }
 
-    @PreAuthorize("hasPermission('', 'Modificar Rol')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)

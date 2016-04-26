@@ -10,7 +10,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -34,8 +33,6 @@ public class CountryController {
         this.countryDAO = countryDAO;
     }
 
-    
-    @PreAuthorize("hasPermission('', 'Listar Paises')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllCountries() {
@@ -59,7 +56,6 @@ public class CountryController {
         return response;
     }
 
-    @PreAuthorize("hasPermission('', 'Insertar Pais')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -78,7 +74,6 @@ public class CountryController {
         return response;
     }
     
-    @PreAuthorize("hasPermission('', 'Modificar Pais')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -102,7 +97,6 @@ public class CountryController {
         return response;
     }
     
-    @PreAuthorize("hasPermission('', 'Eliminar Pais')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteCountry(@ModelAttribute("id") long id) throws
