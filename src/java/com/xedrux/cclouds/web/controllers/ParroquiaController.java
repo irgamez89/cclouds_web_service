@@ -17,6 +17,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,7 +59,8 @@ public class ParroquiaController {
         this.countryDAO = countryDAO;
     }
     
-     @RequestMapping(value = "/", method = RequestMethod.GET,
+    @PreAuthorize("hasPermission('', 'Listar Parroquias')") 
+    @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllParroquias() {
         Collection<CcloudsParroquia> parroquias = parroquiaDAO.getAllParroquias();
@@ -114,6 +116,7 @@ public class ParroquiaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Parroquias')")
     @RequestMapping(value = "/from_city={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getParroquiasFrom(@ModelAttribute("id") 
@@ -126,6 +129,7 @@ public class ParroquiaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Insertar Parroquia')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -145,6 +149,7 @@ public class ParroquiaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Modificar Parroquia')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -169,6 +174,8 @@ public class ParroquiaController {
         return response;
     }
     
+    
+    @PreAuthorize("hasPermission('', 'Eliminar Parroquia')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteParroquia(@ModelAttribute("id") long id) throws
