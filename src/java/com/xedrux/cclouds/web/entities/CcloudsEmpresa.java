@@ -32,6 +32,17 @@ public class CcloudsEmpresa implements Serializable {
         this.idEmpresa = idEmpresa;
     }
 
+    public CcloudsEmpresa(Integer idEmpresa, String nombreEmpresa, String observacionEmpresa, Integer idRepresentante, String rupEmpresa, Date fechaConstitucionEmpresa, String esloganEmpresa, String imagenLogoEmpresa) {
+        this.idEmpresa = idEmpresa;
+        this.nombreEmpresa = nombreEmpresa;
+        this.observacionEmpresa = observacionEmpresa;
+        this.idRepresentante = idRepresentante;
+        this.rupEmpresa = rupEmpresa;
+        this.fechaConstitucionEmpresa = fechaConstitucionEmpresa;
+        this.esloganEmpresa = esloganEmpresa;
+        this.imagenLogoEmpresa = imagenLogoEmpresa;
+    }
+    
     public Integer getIdEmpresa() {
         return idEmpresa;
     }

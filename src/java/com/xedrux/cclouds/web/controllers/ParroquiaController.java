@@ -17,7 +17,6 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -58,8 +57,7 @@ public class ParroquiaController {
     public void setCountryDAO(CountryDAO countryDAO) {
         this.countryDAO = countryDAO;
     }
-    
-    @PreAuthorize("hasPermission('', 'Listar Parroquias')") 
+
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllParroquias() {
@@ -92,16 +90,16 @@ public class ParroquiaController {
         CcloudsParroquia parroquia = parroquiaDAO.getParroquia(id);
         if (parroquia != null) {
             CcloudsCity city = cityDAO.getCity(parroquia.getIdCity());
-            List<CcloudsParroquia> parroquias = 
-                    parroquiaDAO.getAllParroquiasFrom(city.getIdCity());
+            List<CcloudsParroquia> parroquias
+                    = parroquiaDAO.getAllParroquiasFrom(city.getIdCity());
             CcloudsProvince province
                     = provinceDAO.getProvince(city.getIdProvince());
-            List<CcloudsCity> cities = 
-                    cityDAO.getAllCitiesFrom(province.getIdProvince());
+            List<CcloudsCity> cities
+                    = cityDAO.getAllCitiesFrom(province.getIdProvince());
             CcloudsCountry country
                     = countryDAO.getCountry(province.getIdCountry());
-            List<CcloudsProvince> provinces =
-                    provinceDAO.getAllProvincesFrom(country.getIdCountry());
+            List<CcloudsProvince> provinces
+                    = provinceDAO.getAllProvincesFrom(country.getIdCountry());
             response.put("country", country);
             response.put("province", province);
             response.put("city", city);
@@ -116,20 +114,17 @@ public class ParroquiaController {
         return response;
     }
 
-    @PreAuthorize("hasPermission('', 'Listar Parroquias')")
     @RequestMapping(value = "/from_city={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public HashMap<String, Object> getParroquiasFrom(@ModelAttribute("id") 
-                                                     Long city)
+    public HashMap<String, Object> getParroquiasFrom(@ModelAttribute("id") Long city)
             throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
-        List<CcloudsParroquia> parroquias = 
-                parroquiaDAO.getAllParroquiasFrom(city);
+        List<CcloudsParroquia> parroquias
+                = parroquiaDAO.getAllParroquiasFrom(city);
         response.put("parroquias", parroquias);
         return response;
     }
 
-    @PreAuthorize("hasPermission('', 'Insertar Parroquia')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -149,7 +144,6 @@ public class ParroquiaController {
         return response;
     }
 
-    @PreAuthorize("hasPermission('', 'Modificar Parroquia')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -173,18 +167,16 @@ public class ParroquiaController {
         }
         return response;
     }
-    
-    
-    @PreAuthorize("hasPermission('', 'Eliminar Parroquia')")
+
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteParroquia(@ModelAttribute("id") long id) throws
             EntityNotFoundException {
         if (!parroquiaDAO.deleteParroquia(id)) {
             throw new EntityNotFoundException(
-                    "Couldn't delete. " + MESSAGE+id);
+                    "Couldn't delete. " + MESSAGE + id);
         }
     }
-    
+
     final String MESSAGE = "No hay parroquia con id: ";
 }
