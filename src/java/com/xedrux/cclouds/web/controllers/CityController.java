@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,7 @@ public class CityController {
         this.cityDAO = cityDAO;
     }
     
+    @PreAuthorize("hasPermission('', 'Listar Ciudades')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllCities() {
@@ -66,9 +68,11 @@ public class CityController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Ciudades')")
     @RequestMapping(value = "/from_province={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public HashMap<String, Object> getCitiesFrom(@ModelAttribute("id") Long province)
+    public HashMap<String, Object> getCitiesFrom(@ModelAttribute("id") 
+                                                 Long province)
             throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         List<CcloudsCity> cities = cityDAO.getAllCitiesFrom(province);
@@ -76,6 +80,7 @@ public class CityController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Insertar Ciudad')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -95,6 +100,7 @@ public class CityController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Modificar Ciudad')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -119,6 +125,7 @@ public class CityController {
         return response;
     }
     
+    @PreAuthorize("hasPermission('', 'Eliminar Ciudad')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteCity(@ModelAttribute("id") long id) throws
@@ -128,8 +135,9 @@ public class CityController {
                     "Couldn't delete. There is no city with id:" + id);
         }
     }
-
-    @RequestMapping(value = "/detailed/id={id}", method = RequestMethod.GET,
+    
+    
+     @RequestMapping(value = "/detailed/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getCityProvinceAndCountry(
             @ModelAttribute("id") Long id)
@@ -153,5 +161,5 @@ public class CityController {
         }
         return response;
     }
-    final String MESSAGE = "No hay ciudad con id: ";
+     final String MESSAGE = "No hay ciudad con id: ";
 }

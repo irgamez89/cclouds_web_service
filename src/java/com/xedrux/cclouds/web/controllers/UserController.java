@@ -107,7 +107,7 @@ public class UserController {
         }
         return response;
     }
-
+    @PreAuthorize("hasPermission('', 'Listar Usuarios')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllUsers() {
