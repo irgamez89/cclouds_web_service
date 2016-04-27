@@ -15,6 +15,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,6 +43,7 @@ public class SucursalController {
         this.sucursalDAO = sucursalDAO;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Sucursales')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllSucursales() {
@@ -51,6 +53,7 @@ public class SucursalController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Sucursales')")
     @RequestMapping(value = "/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getSucursal(@ModelAttribute("id") Long id)
@@ -66,6 +69,7 @@ public class SucursalController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Sucursales')")
     @RequestMapping(value = "/from_sub_empresa={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getSucursalesFrom(@ModelAttribute("id") Long subEmpresa)
@@ -76,6 +80,7 @@ public class SucursalController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Insertar Sucursal')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -95,6 +100,7 @@ public class SucursalController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Modificar Sucursal')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -119,6 +125,7 @@ public class SucursalController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Eliminar Sucursal')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteSucursal(@ModelAttribute("id") long id) throws
@@ -129,6 +136,7 @@ public class SucursalController {
         }
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Sucursales')")
     @RequestMapping(value = "/detailed/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getSucursalSubEmpresaAndEmpresa(

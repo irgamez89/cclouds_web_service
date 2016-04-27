@@ -10,6 +10,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +34,7 @@ public class EmpresaController {
         this.empresaDAO = empresaDAO;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Empresas')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllEmpresas() {
@@ -42,6 +44,7 @@ public class EmpresaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Listar Empresas')")
     @RequestMapping(value = "/id={id}", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getEmpresa(@ModelAttribute("id") Long id)
@@ -56,6 +59,7 @@ public class EmpresaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Insertar Empresa')")
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -74,6 +78,7 @@ public class EmpresaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Modificar Empresa')")
     @RequestMapping(value = "/{Id}", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -97,6 +102,7 @@ public class EmpresaController {
         return response;
     }
 
+    @PreAuthorize("hasPermission('', 'Eliminar Empresa')")
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteEmpresa(@ModelAttribute("id") long id) throws
