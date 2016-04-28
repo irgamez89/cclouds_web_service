@@ -1,6 +1,7 @@
 package com.xedrux.cclouds.web.entities;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.validation.constraints.Size;
 
@@ -24,7 +25,7 @@ public class CcloudsEmpresa implements Serializable {
     private String esloganEmpresa;
     @Size(max = 500)
     private String imagenLogoEmpresa;
-
+    private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
     public CcloudsEmpresa() {
     }
 
@@ -83,8 +84,8 @@ public class CcloudsEmpresa implements Serializable {
         this.rupEmpresa = rupEmpresa;
     }
 
-    public Date getFechaConstitucionEmpresa() {
-        return fechaConstitucionEmpresa;
+    public String getFechaConstitucionEmpresa() {
+        return dateFormatter.format(fechaConstitucionEmpresa);
     }
 
     public void setFechaConstitucionEmpresa(Date fechaConstitucionEmpresa) {

@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 public class CcloudsSucursal implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @NotNull
     private Integer idSucursal;
     @Size(max = 255)
     private String nombreSucursal;

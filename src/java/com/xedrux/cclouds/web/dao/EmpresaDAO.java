@@ -63,7 +63,7 @@ public class EmpresaDAO {
     public long insertEmpresa(CcloudsEmpresa empresa) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String template = "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?);";
+                + "VALUES (?, ?, ?, ?, CAST(? AS date), ?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, NAME, OBSERVACION,
                 REPRESENTANTE, RUP, FECHA, ESOLOGAN, IMAGEN_LOGO);
         dataSource.update((Connection connection) -> {
@@ -83,10 +83,10 @@ public class EmpresaDAO {
 
     public boolean updateEmpresa(CcloudsEmpresa empresa) {
         String sql = "UPDATE %s SET "
-                + "%s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? WHERE "
+                + "%s=?, %s=?, %s=?, %s=?, %s=CAST(? AS date), %s=?, %s=? WHERE "
                 + "%s = ?;";
         String UPDATE_SQL = String.format(sql, TABLE_NAME, NAME, OBSERVACION,
-                REPRESENTANTE, RUP, FECHA, ESOLOGAN, IMAGEN_LOGO);
+                REPRESENTANTE, RUP, FECHA, ESOLOGAN, IMAGEN_LOGO,ID);
         return (dataSource.update(UPDATE_SQL, empresa.getNombreEmpresa(),
                 empresa.getObservacionEmpresa(), empresa.getIdRepresentante(),
                 empresa.getRupEmpresa(), empresa.getFechaConstitucionEmpresa(),

@@ -77,7 +77,7 @@ public class UserDAO {
     }
 
     public boolean updateUser(CcloudsUsuario user){
-        if(user.getPassword()==null)
+        if(user.getPassword()==null || user.getPassword().isEmpty())
             return updateUserWithoutPassword(user);
         else 
             return updateUserWithPassword(user);

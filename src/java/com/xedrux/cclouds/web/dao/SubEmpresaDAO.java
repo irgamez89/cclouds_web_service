@@ -76,9 +76,10 @@ public class SubEmpresaDAO {
     public long insertSubEppresa(CcloudsSubEmpresa subEmpresa) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String template = "INSERT INTO %s (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + "VALUES (?, ?, ?, ?, ?, ?, CAST(? AS date), ?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, ID_EMPRESA, NAME,
-                OBSERVACION, TIPO_NEGOCIO, REPRESENTATNTE1, REPRESENTATNTE2, FECHA, ESLOGAN, IMAGEN);
+                OBSERVACION, TIPO_NEGOCIO, REPRESENTATNTE1, REPRESENTATNTE2,
+                FECHA, ESLOGAN, IMAGEN);
         dataSource.update((Connection connection) -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL,
                     new String[]{ID});
@@ -98,7 +99,7 @@ public class SubEmpresaDAO {
 
     public boolean updateSubEmpresa(CcloudsSubEmpresa subEmpresa) {
         String sql = "UPDATE %s SET "
-                + "%s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=? WHERE "
+                + "%s=?, %s=?, %s=?, %s=?, %s=?, %s=?, %s=CAST(? AS date), %s=?, %s=? WHERE "
                 + "%s = ?;";
         String UPDATE_SQL = String.format(sql, TABLE_NAME, ID_EMPRESA, NAME,
                 OBSERVACION, TIPO_NEGOCIO, REPRESENTATNTE1, REPRESENTATNTE2, FECHA, ESLOGAN, IMAGEN, ID);
