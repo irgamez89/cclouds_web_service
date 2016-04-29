@@ -102,7 +102,7 @@ public class AgencialDAO {
         return (dataSource.update(UPDATE_SQL, agencia.getIdSucursal(),
                 agencia.getNombreAgencia(), agencia.getObservacionAgencia(),
                 agencia.getIdRepresentanteAgencia(),
-                agencia.getIdSucursal()) > 0);
+                agencia.getIdAgencia()) > 0);
     }
 
     public Boolean deleteAgencia(long id) {
