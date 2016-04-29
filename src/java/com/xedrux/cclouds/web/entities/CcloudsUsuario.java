@@ -42,7 +42,7 @@ public class CcloudsUsuario {
     @NotNull
     private boolean enabled;
     private SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy/MM/dd");
-
+    long idAgencia;
     public CcloudsUsuario() {
         
     }
@@ -75,7 +75,7 @@ public class CcloudsUsuario {
             String password, String passwordResetToken, String phoneNumber,
             String userEmail, String firstName, String lastName, String sex,
             Date dateBirth, String dbHash, String plainTextPassword,
-            Long parroquia, boolean enabled) throws UnableToCreateEntityException {
+            Long parroquia, boolean enabled, long idAgencia) throws UnableToCreateEntityException {
         checkEmailSyntax(userEmail);
         this.idUser = idUser;
         this.idRol = idRol;
@@ -92,6 +92,7 @@ public class CcloudsUsuario {
         this.plainTextPassword = plainTextPassword;
         this.parroquia = parroquia;
         this.enabled = enabled;
+        this.idAgencia =  idAgencia;
     }
 
     public long getIdUser() {
@@ -222,5 +223,9 @@ public class CcloudsUsuario {
 //    public String toString() {
 //        return "test.CcloudsUsuario[ idUser=" + idUser + " ]";
 //    }
+
+    public long getIdAgencia() {
+        return idAgencia;
+    }
 
 }

@@ -13,7 +13,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -48,12 +47,12 @@ public class UserDAO {
                 + " %s, %s, %s,%s,"
                 + " %s, %s, %s, %s,"
                 + " %s,%s, %s, %s,"
-                + " %s)"
+                + " %s, %s)"
                 + "VALUES (?, ?, ?, ?,?, ?, ?, ?, ?, CAST(? AS date),?, ?, ?,"
-                + " ?);";
+                + " ?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, ROL, USERNAME, PASSWORD, TOKEN, PHONE_NUMBER,
                 USER_EMAIL, FIRST_NAME, LAST_NAME, SEX, BIRTH_DATE, DB_HASH,
-                PLAIN_TEXT_PASSWORD,  PARROQUIA, ENABLED);
+                PLAIN_TEXT_PASSWORD,  PARROQUIA, ENABLED,AGENCIA);
         dataSource.update((Connection connection) -> {
             PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID});
             ps.setObject(1, user.getIdRol());
@@ -70,6 +69,7 @@ public class UserDAO {
             ps.setObject(12, user.getPlainTextPassword());
             ps.setObject(13, user.getParroquia());
             ps.setObject(14, user.isEnabled());
+            ps.setObject(15, user.getIdAgencia());
             return ps;
         }, keyHolder);
         
@@ -88,17 +88,18 @@ public class UserDAO {
                 + "%s=?, %s=?, %s=?, %s=?,"
                 + " %s=?, %s=?, %s=?,"
                 + " %s=?, %s=?, %s=?, %s=?, "
-                + "%s=?, %s=?, %s=? WHERE "
+                + "%s=?, %s=?, %s=?, %s=?  WHERE "
                 + "%s = ?;";
         String UPDATE_SQL = String.format(sql, TABLE_NAME, ROL, USERNAME, PASSWORD, TOKEN,
                 PHONE_NUMBER, USER_EMAIL, FIRST_NAME, LAST_NAME, SEX, BIRTH_DATE,
-                DB_HASH, PLAIN_TEXT_PASSWORD, PARROQUIA, ENABLED,ID);
+                DB_HASH, PLAIN_TEXT_PASSWORD, PARROQUIA, ENABLED,AGENCIA,ID);
         return (dataSource.update(UPDATE_SQL, user.getIdRol(), user.getUsername(),
                 user.getPassword(), user.getPasswordResetToken(),
                 user.getPhoneNumber(), user.getUserEmail(), user.getFirstName(),
                 user.getLastName(), user.getSex(), new Date(user.getDateBirth()),//TODO: reomve this once message converter is properly configured
                 user.getDbHash(), user.getPlainTextPassword(),
-                user.getParroquia(), user.isEnabled(), user.getIdUser()) > 0);
+                user.getParroquia(), user.isEnabled(), user.getIdAgencia(),
+                user.getIdUser()) > 0);
     }
 
     private boolean updateUserWithoutPassword(CcloudsUsuario user) {
@@ -106,17 +107,18 @@ public class UserDAO {
                 + "%s=?,  %s=?, %s=?,"
                 + " %s=?, %s=?, %s=?,"
                 + " %s=?, %s=?, %s=?, %s=?, "
-                + "%s=?, %s=?, %s=? WHERE "
+                + "%s=?, %s=?, %s=?, %s=? WHERE "
                 + "%s = ?;";
         String UPDATE_SQL = String.format(sql, TABLE_NAME, ROL, USERNAME,  TOKEN,
                 PHONE_NUMBER, USER_EMAIL, FIRST_NAME, LAST_NAME, SEX, BIRTH_DATE,
-                DB_HASH, PLAIN_TEXT_PASSWORD, PARROQUIA, ENABLED,ID);
+                DB_HASH, PLAIN_TEXT_PASSWORD, PARROQUIA, ENABLED,AGENCIA,ID);
         return (dataSource.update(UPDATE_SQL, user.getIdRol(), user.getUsername(),
                 user.getPasswordResetToken(),
                 user.getPhoneNumber(), user.getUserEmail(), user.getFirstName(),
                 user.getLastName(), user.getSex(), new Date(user.getDateBirth()),//TODO: reomve this once message converter is properly
                 user.getDbHash(), user.getPlainTextPassword(),
-                user.getParroquia(), user.isEnabled(), user.getIdUser()) > 0);
+                user.getParroquia(), user.isEnabled(), user.getIdAgencia(),
+                user.getIdUser()) > 0);
     }
     
     public List<CcloudsUsuario> getAllUsers() {
@@ -181,7 +183,8 @@ public class UserDAO {
                                     rs.getString(DB_HASH),
                                     rs.getString(PLAIN_TEXT_PASSWORD),
                                     rs.getLong(PARROQUIA),
-                                    rs.getBoolean(ENABLED)
+                                    rs.getBoolean(ENABLED),
+                                    rs.getLong(AGENCIA)
                             );
                         } catch (UnableToCreateEntityException ex) {
                             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -206,5 +209,6 @@ public class UserDAO {
     final String PLAIN_TEXT_PASSWORD = "plain_text_password";
     final String PARROQUIA = "parroquia";
     final String ENABLED = "enabled";
+    final String AGENCIA = "id_agencia";
 
 }
