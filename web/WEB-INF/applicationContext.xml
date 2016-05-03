@@ -84,7 +84,7 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean id="SucursalDAO" class="com.xedrux.cclouds.web.dao.SucursalDAO">
         <property name="dataSource" ref="MydataSource"/>
     </bean>
-    <bean id="AgencialDAO" class="com.xedrux.cclouds.web.dao.AgencialDAO">
+    <bean id="AgenciaDAO" class="com.xedrux.cclouds.web.dao.AgenciaDAO">
         <property name="dataSource" ref="MydataSource"/>
     </bean>
     

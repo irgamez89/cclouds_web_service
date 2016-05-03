@@ -1,6 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
-import com.xedrux.cclouds.web.dao.AgencialDAO;
+import com.xedrux.cclouds.web.dao.AgenciaDAO;
 import com.xedrux.cclouds.web.dao.EmpresaDAO;
 import com.xedrux.cclouds.web.dao.SubEmpresaDAO;
 import com.xedrux.cclouds.web.dao.SucursalDAO;
@@ -35,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AgenciaController {
 
     @Autowired
-    AgencialDAO agencialDAO;
+    AgenciaDAO agencialDAO;
     @Autowired
     SucursalDAO sucursalDAO;
     @Autowired
@@ -43,7 +43,7 @@ public class AgenciaController {
     @Autowired
     EmpresaDAO empresaDAO;
 
-    public void setAgenciaDAO(AgencialDAO agencialDAO) {
+    public void setAgenciaDAO(AgenciaDAO agencialDAO) {
         this.agencialDAO = agencialDAO;
     }
 
