@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class ProvinceDAO {
+public class ProvinceDAO implements CcloudsDAO{
 
     ProvinceDAO instance;
     private JdbcTemplate dataSource;
@@ -36,6 +36,11 @@ public class ProvinceDAO {
         return instance;
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public List<CcloudsProvince> getAllProvinces() {
         String sql = "SELECT * FROM " + TABLE_NAME;
         try {

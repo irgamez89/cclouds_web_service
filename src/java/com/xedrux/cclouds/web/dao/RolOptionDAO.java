@@ -21,7 +21,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class RolOptionDAO {
+public class RolOptionDAO implements CcloudsDAO{
 
     RolOptionDAO instance;
     private JdbcTemplate dataSource;
@@ -30,7 +30,12 @@ public class RolOptionDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = new JdbcTemplate(dataSource);
     }
-
+    
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public RolOptionDAO RolOptionDAO() {
         if (instance == null) {
             instance = new RolOptionDAO();

@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Reinier
  */
-public class SubEmpresaDAO {
+public class SubEmpresaDAO implements  CcloudsDAO{
 
     SubEmpresaDAO instance;
     private JdbcTemplate dataSource;
@@ -28,7 +28,12 @@ public class SubEmpresaDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = new JdbcTemplate(dataSource);
     }
-
+    
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public SubEmpresaDAO SubEmpresaDAO() {
         if (instance == null) {
             instance = new SubEmpresaDAO();

@@ -21,7 +21,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class LogDAO {
+public class LogDAO implements CCloudsDAO{
 
     LogDAO instance;
     private JdbcTemplate dataSource;
@@ -30,6 +30,11 @@ public class LogDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = new JdbcTemplate(dataSource);
     }
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
 
     public LogDAO LogDAO() {
         if (instance == null) {

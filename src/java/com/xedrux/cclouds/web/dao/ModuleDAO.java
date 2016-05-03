@@ -20,7 +20,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rdríguez Gamez
  */
-public class ModuleDAO {
+public class ModuleDAO implements CcloudsDAO{
 ModuleDAO instance;
     private JdbcTemplate dataSource;
 
@@ -29,6 +29,11 @@ ModuleDAO instance;
         this.dataSource = new JdbcTemplate(dataSource);
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public ModuleDAO ModuleDAO() {
         if (instance == null) {
             instance = new ModuleDAO();

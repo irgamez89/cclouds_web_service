@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class CountryDAO {
+public class CountryDAO implements CcloudsDAO{
     CountryDAO instance;
     private JdbcTemplate dataSource;
 
@@ -27,7 +27,12 @@ public class CountryDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = new JdbcTemplate(dataSource);
     }
-
+    
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public CountryDAO CountryDAO() {
         if (instance == null) {
             instance = new CountryDAO();

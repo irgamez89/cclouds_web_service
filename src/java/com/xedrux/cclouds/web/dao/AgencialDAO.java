@@ -20,7 +20,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Reinier
  */
-public class AgencialDAO {
+public class AgencialDAO implements CcloudsDAO {
 
     AgencialDAO instance;
     private JdbcTemplate dataSource;
@@ -28,6 +28,11 @@ public class AgencialDAO {
     @Autowired
     public void setDataSource(DataSource dataSource) {
         this.dataSource = new JdbcTemplate(dataSource);
+    }
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
     }
 
     public AgencialDAO AgenciaDAO() {
@@ -87,7 +92,7 @@ public class AgencialDAO {
             ps.setObject(2, agencia.getNombreAgencia());
             ps.setObject(3, agencia.getObservacionAgencia());
             ps.setObject(4, agencia.getIdRepresentanteAgencia());
-          
+
             return ps;
         }, keyHolder);
         return keyHolder.getKey().longValue();

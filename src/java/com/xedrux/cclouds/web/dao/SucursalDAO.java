@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Reinier
  */
-public class SucursalDAO {
+public class SucursalDAO implements  CcloudsDAO{
 
     SucursalDAO instance;
     private JdbcTemplate dataSource;
@@ -28,7 +28,12 @@ public class SucursalDAO {
     public void setDataSource(DataSource dataSource) {
         this.dataSource = new JdbcTemplate(dataSource);
     }
-
+    
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public SucursalDAO SucursalDAO() {
         if (instance == null) {
             instance = new SucursalDAO();

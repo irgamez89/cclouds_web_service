@@ -109,4 +109,13 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
     <bean id="expressionHandler" class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler">
         <property name="permissionEvaluator" ref="myPermissionEvaluator"/>
     </bean>
+    
+    <bean id="myLogger" class="com.xedrux.cclouds.web.springconfig.Logger"/>
+    <aop:config>
+        <aop:aspect id="myAspect" ref="myLogger">
+            <aop:pointcut id="businessService"
+                expression="execution(* com.xedrux.cclouds.web.controllers.*.insert*(..)) &amp;&amp; this(controllers)"/>
+            <aop:after pointcut-ref="businessService" method="logAction"/>
+        </aop:aspect>
+    </aop:config>
 </beans>

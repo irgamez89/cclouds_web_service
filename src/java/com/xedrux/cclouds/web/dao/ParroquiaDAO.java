@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class ParroquiaDAO {
+public class ParroquiaDAO implements CcloudsDAO{
 
     ParroquiaDAO instance;
     private JdbcTemplate dataSource;
@@ -29,6 +29,11 @@ public class ParroquiaDAO {
         this.dataSource = new JdbcTemplate(dataSource);
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public ParroquiaDAO ParroquiaDAO() {
         if (instance == null) {
             instance = new ParroquiaDAO();

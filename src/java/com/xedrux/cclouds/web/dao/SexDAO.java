@@ -20,7 +20,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class SexDAO {
+public class SexDAO implements CcloudsDAO{
     SexDAO instance;
     private JdbcTemplate dataSource;
 
@@ -29,6 +29,11 @@ public class SexDAO {
         this.dataSource = new JdbcTemplate(dataSource);
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public SexDAO SexDAO() {
         if (instance == null) {
             instance = new SexDAO();

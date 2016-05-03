@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.RowMapper;
  *
  * @author Reinier
  */
-public class AdmModuloDAO {
+public class AdmModuloDAO implements CcloudsDAO{
 
     AdmModuloDAO instance;
     private JdbcTemplate dataSource;
@@ -55,6 +55,11 @@ public class AdmModuloDAO {
         } catch (EmptyResultDataAccessException e) {
             return null;
         }
+    }
+
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
     }
     
 
