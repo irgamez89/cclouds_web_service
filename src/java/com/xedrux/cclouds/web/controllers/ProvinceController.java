@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.CountryDAO;
 import com.xedrux.cclouds.web.dao.ProvinceDAO;
 import com.xedrux.cclouds.web.entities.CcloudsCity;
@@ -39,6 +40,9 @@ public class ProvinceController {
 
     public void setProvinceDAO(ProvinceDAO provinceDAO) {
         this.provinceDAO = provinceDAO;
+    }
+    public CcloudsDAO getDAO() {
+        return provinceDAO;
     }
 
     @PreAuthorize("hasPermission('', 'Listar Provincias')")

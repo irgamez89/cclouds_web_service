@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.CountryDAO;
 import com.xedrux.cclouds.web.entities.CcloudsCountry;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
@@ -34,6 +35,9 @@ public class CountryController {
         this.countryDAO = countryDAO;
     }
 
+    public CcloudsDAO getDAO() {
+        return countryDAO;
+    }
     
     @PreAuthorize("hasPermission('', 'Listar Paises')")
     @RequestMapping(value = "/", method = RequestMethod.GET,

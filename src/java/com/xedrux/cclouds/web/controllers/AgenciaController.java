@@ -1,6 +1,7 @@
 package com.xedrux.cclouds.web.controllers;
 
 import com.xedrux.cclouds.web.dao.AgencialDAO;
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.EmpresaDAO;
 import com.xedrux.cclouds.web.dao.SubEmpresaDAO;
 import com.xedrux.cclouds.web.dao.SucursalDAO;
@@ -47,6 +48,11 @@ public class AgenciaController {
         this.agencialDAO = agencialDAO;
     }
 
+    public CcloudsDAO getDAO() {
+        return agencialDAO;
+    }
+
+    
     @PreAuthorize("hasPermission('', 'Listar Agencias')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

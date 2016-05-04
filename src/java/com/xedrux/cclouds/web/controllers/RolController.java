@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.RolDAO;
 import com.xedrux.cclouds.web.dao.RolOptionDAO;
 import com.xedrux.cclouds.web.entities.CcloudsRol;
@@ -38,7 +39,10 @@ public class RolController {
     public void setRolDAO(RolDAO DAO) {
         this.rolDAO = DAO;
     }
-
+    
+    public CcloudsDAO getDAO() {
+        return rolDAO;
+    }
     public void setRolOptionDAO(RolOptionDAO rolOptionDAO) {
         this.rolOptionDAO = rolOptionDAO;
     }

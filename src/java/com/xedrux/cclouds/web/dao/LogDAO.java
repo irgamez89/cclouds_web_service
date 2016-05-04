@@ -21,7 +21,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class LogDAO implements CCloudsDAO{
+public class LogDAO implements CcloudsDAO{
 
     LogDAO instance;
     private JdbcTemplate dataSource;
@@ -46,17 +46,16 @@ public class LogDAO implements CCloudsDAO{
     public long insertLog(CcloudsLogs log) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String template = "INSERT INTO %s (%s,"
-                + " %s, %s, %s )"
-                + "VALUES (?, ?, ?, ?);";
+                + "  %s, %s )"
+                + "VALUES (?, ?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, 
-                DATE, ID_USER, ACCION, TABLE);
+                ID_USER, ACCION, TABLE);
         
             dataSource.update((Connection connection) -> {
                 PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID});
-                ps.setObject(1, log.getLastDate());
-                ps.setObject(2, log.getIdUser());
-                ps.setObject(3, log.getAccion());
-                ps.setObject(4, log.getTableName());
+                ps.setObject(1, log.getIdUser());
+                ps.setObject(2, log.getAccion());
+                ps.setObject(3, log.getTableName());
                 return ps;
             }, keyHolder);
         

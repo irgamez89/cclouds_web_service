@@ -20,7 +20,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class RolDAO {
+public class RolDAO implements CcloudsDAO{
 
     RolDAO instance;
     private JdbcTemplate dataSource;
@@ -37,6 +37,11 @@ public class RolDAO {
         return instance;
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public long insertRol(CcloudsRol rol) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String template = "INSERT INTO %s (%s,"

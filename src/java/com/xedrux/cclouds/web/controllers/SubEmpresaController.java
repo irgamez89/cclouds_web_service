@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.EmpresaDAO;
 import com.xedrux.cclouds.web.dao.SubEmpresaDAO;
 import com.xedrux.cclouds.web.entities.CcloudsEmpresa;
@@ -39,6 +40,9 @@ public class SubEmpresaController {
         this.subEmpresaDAO = subEmpresaDAO;
     }
 
+    public CcloudsDAO getDAO() {
+        return subEmpresaDAO;
+    }
     @PreAuthorize("hasPermission('', 'Listar SubEmpresas')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

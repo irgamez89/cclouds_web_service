@@ -21,7 +21,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class OptionDAO {
+public class OptionDAO implements CcloudsDAO{
     OptionDAO instance;
     private JdbcTemplate dataSource;
 
@@ -30,6 +30,11 @@ public class OptionDAO {
         this.dataSource = new JdbcTemplate(dataSource);
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public OptionDAO OptionDAO() {
         if (instance == null) {
             instance = new OptionDAO();

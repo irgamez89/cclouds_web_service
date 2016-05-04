@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.SexDAO;
 import com.xedrux.cclouds.web.entities.CcloudsSex;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
@@ -32,7 +33,9 @@ public class SexController {
         this.sexDAO = DAO;
     }
 
-    
+    public CcloudsDAO getDAO() {
+        return sexDAO;
+    }
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllSexs() {

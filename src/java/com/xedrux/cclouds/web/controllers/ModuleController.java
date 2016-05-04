@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.ModuleDAO;
 import com.xedrux.cclouds.web.entities.CcloudsModule;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
@@ -30,6 +31,9 @@ public class ModuleController {
 
     public void setModuleDAO(ModuleDAO DAO) {
         this.moduleDAO = DAO;
+    }
+    public CcloudsDAO getDAO() {
+        return moduleDAO;
     }
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/", method = RequestMethod.POST,

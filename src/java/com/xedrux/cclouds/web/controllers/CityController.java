@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.CityDAO;
 import com.xedrux.cclouds.web.dao.CountryDAO;
 import com.xedrux.cclouds.web.dao.ProvinceDAO;
@@ -41,6 +42,9 @@ public class CityController {
 
     public void setCityDAO(CityDAO cityDAO) {
         this.cityDAO = cityDAO;
+    }
+    public CcloudsDAO getDAO(){
+        return cityDAO;
     }
     
     @PreAuthorize("hasPermission('', 'Listar Ciudades')")

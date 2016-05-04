@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.EmpresaDAO;
 import com.xedrux.cclouds.web.entities.CcloudsEmpresa;
 import com.xedrux.cclouds.web.exceptions.EntityNotFoundException;
@@ -33,7 +34,9 @@ public class EmpresaController {
     public void setEmpresaDAO(EmpresaDAO empresaDAO) {
         this.empresaDAO = empresaDAO;
     }
-
+    public CcloudsDAO getDAO() {
+        return empresaDAO;
+    }
     @PreAuthorize("hasPermission('', 'Listar Empresas')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

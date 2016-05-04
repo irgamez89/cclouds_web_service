@@ -19,7 +19,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rdríguez Gamez
  */
-public class CityDAO {
+public class CityDAO implements CcloudsDAO{
 
     CityDAO instance;
     private JdbcTemplate dataSource;
@@ -29,6 +29,11 @@ public class CityDAO {
         this.dataSource = new JdbcTemplate(dataSource);
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public CityDAO CityDAO() {
         if (instance == null) {
             instance = new CityDAO();

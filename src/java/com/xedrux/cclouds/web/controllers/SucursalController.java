@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.EmpresaDAO;
 import com.xedrux.cclouds.web.dao.SubEmpresaDAO;
 import com.xedrux.cclouds.web.dao.SucursalDAO;
@@ -43,6 +44,9 @@ public class SucursalController {
         this.sucursalDAO = sucursalDAO;
     }
 
+    public CcloudsDAO getDAO() {
+        return sucursalDAO;
+    }
     @PreAuthorize("hasPermission('', 'Listar Sucursales')")
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

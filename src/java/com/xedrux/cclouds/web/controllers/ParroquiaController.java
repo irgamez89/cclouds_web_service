@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.CityDAO;
 import com.xedrux.cclouds.web.dao.CountryDAO;
 import com.xedrux.cclouds.web.dao.ParroquiaDAO;
@@ -58,7 +59,9 @@ public class ParroquiaController {
     public void setCountryDAO(CountryDAO countryDAO) {
         this.countryDAO = countryDAO;
     }
-    
+    public CcloudsDAO getDAO() {
+        return parroquiaDAO;
+    }
     @PreAuthorize("hasPermission('', 'Listar Parroquias')") 
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)

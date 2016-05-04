@@ -1,6 +1,7 @@
 package com.xedrux.cclouds.web.controllers;
 
 import com.xedrux.cclouds.web.dao.AdmModuloDAO;
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.entities.AdmModulo;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -27,6 +28,9 @@ public class AdmModuloController {
         this.admModuloDAO = admModuloDAO;
     }
 
+    public CcloudsDAO getDAO() {
+        return admModuloDAO;
+    }
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllModules() {

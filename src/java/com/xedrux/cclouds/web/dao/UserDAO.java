@@ -24,7 +24,7 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Isidro Rodríguez Gamez
  */
-public class UserDAO {
+public class UserDAO implements CcloudsDAO{
 
     UserDAO instance;
     private JdbcTemplate dataSource;
@@ -34,6 +34,11 @@ public class UserDAO {
         this.dataSource = new JdbcTemplate(dataSource);
     }
 
+    @Override
+    public String getTableName() {
+        return TABLE_NAME;
+    }
+    
     public UserDAO UserDAO() {
         if (instance == null) {
             instance = new UserDAO();

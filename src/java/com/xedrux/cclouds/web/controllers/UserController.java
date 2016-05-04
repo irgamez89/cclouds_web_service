@@ -1,5 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
+import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.UserDAO;
 import com.xedrux.cclouds.web.entities.CcloudsUsuario;
 import com.xedrux.cclouds.web.exceptions.UnableToCreateEntityException;
@@ -41,6 +42,9 @@ public class UserController {
         this.userDAO = userDAO;
     }
 
+    public CcloudsDAO getDAO() {
+        return userDAO;
+    }
     public void setPasswordEncoder(BCryptPasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
