@@ -1,7 +1,6 @@
 package com.xedrux.cclouds.web.dao;
 
 import com.xedrux.cclouds.web.entities.AdmModulo;
-import com.xedrux.cclouds.web.entities.CcloudsOptions;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;

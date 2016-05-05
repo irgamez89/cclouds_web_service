@@ -1,7 +1,6 @@
 package com.xedrux.cclouds.web.springconfig;
 
 import com.xedrux.cclouds.web.dao.AdmModuloDAO;
-import com.xedrux.cclouds.web.dao.OptionDAO;
 import com.xedrux.cclouds.web.dao.RolOptionDAO;
 import com.xedrux.cclouds.web.dao.UserDAO;
 import java.io.Serializable;

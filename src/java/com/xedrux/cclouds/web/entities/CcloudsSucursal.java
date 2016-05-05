@@ -1,8 +1,6 @@
 package com.xedrux.cclouds.web.entities;
 
 import java.io.Serializable;
-import java.util.Collection;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
