@@ -5,17 +5,14 @@
  */
 package com.xedrux.cclouds.web.springconfig;
 
-import com.xedrux.cclouds.web.controllers.CountryController;
 import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.LogDAO;
 import com.xedrux.cclouds.web.dao.UserDAO;
 import com.xedrux.cclouds.web.entities.CcloudsLogs;
 import java.lang.reflect.InvocationTargetException;
-import java.security.Principal;
 import java.util.logging.Level;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 

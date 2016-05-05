@@ -1,7 +1,6 @@
 package com.xedrux.cclouds.web.dao;
 
 import com.xedrux.cclouds.web.entities.CcloudsAgencia;
-import com.xedrux.cclouds.web.entities.CcloudsSucursal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,9 +19,9 @@ import org.springframework.jdbc.support.KeyHolder;
  *
  * @author Reinier
  */
-public class AgencialDAO implements CcloudsDAO {
+public class AgenciaDAO implements CcloudsDAO {
 
-    AgencialDAO instance;
+    AgenciaDAO instance;
     private JdbcTemplate dataSource;
 
     @Autowired
@@ -35,9 +34,9 @@ public class AgencialDAO implements CcloudsDAO {
         return TABLE_NAME;
     }
 
-    public AgencialDAO AgenciaDAO() {
+    public AgenciaDAO AgenciaDAO() {
         if (instance == null) {
-            instance = new AgencialDAO();
+            instance = new AgenciaDAO();
         }
         return instance;
     }
@@ -46,7 +45,7 @@ public class AgencialDAO implements CcloudsDAO {
         String sql = "SELECT * FROM " + TABLE_NAME;
         try {
             List<CcloudsAgencia> agencia = dataSource.query(sql,
-                    new AgencialDAO.AgenciaMapper());
+                    new AgenciaDAO.AgenciaMapper());
             return agencia;
         } catch (EmptyResultDataAccessException e) {
             return new LinkedList<>();
