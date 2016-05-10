@@ -79,7 +79,7 @@ public class LogDAO implements CcloudsDAO{
             log = new CcloudsLogs(
                     rs.getLong(ID),
                     rs.getLong(ID_USER),
-                    rs.getDate(DATE),
+                    rs.getTimestamp(DATE),
                     rs.getString(ACCION),
                     rs.getString(TABLE)
             );

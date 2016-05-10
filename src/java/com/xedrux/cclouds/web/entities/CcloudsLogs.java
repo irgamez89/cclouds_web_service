@@ -1,6 +1,7 @@
 package com.xedrux.cclouds.web.entities;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
 public class CcloudsLogs implements Serializable {
     private Long idLog;
     @NotNull
-    private Date lastDate;
+    private Timestamp lastDate;
     @Size(max = 255)
     private String accion;
     @Size(max = 255)
@@ -21,7 +22,7 @@ public class CcloudsLogs implements Serializable {
     public CcloudsLogs() {
     }
 
-    public CcloudsLogs(Long idLog,long idUser, Date lastDate, String accion, String tableName) {
+    public CcloudsLogs(Long idLog,long idUser, Timestamp lastDate, String accion, String tableName) {
         this.idLog = idLog;
         this.idUser = idUser;
         this.lastDate = lastDate;
@@ -46,11 +47,11 @@ public class CcloudsLogs implements Serializable {
     }
 
 
-    public Date getLastDate() {
-        return lastDate;
+    public String getLastDate() {
+        return lastDate.toString();
     }
 
-    public void setLastDate(Date lastDate) {
+    public void setLastDate(Timestamp lastDate) {
         this.lastDate = lastDate;
     }
 
