@@ -5,6 +5,8 @@
  */
 package com.xedrux.cclouds.web.springconfig;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.LogDAO;
 import com.xedrux.cclouds.web.dao.UserDAO;
@@ -36,9 +38,10 @@ public class Logger {
         this.userDAO = userDAO;
     }
     
-    
     public void logAction(JoinPoint joinpoint, Object controllers){
         try {
+            ObjectMapper mapper = new ObjectMapper();
+            System.out.println("method args: "+joinpoint.getArgs().length);
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             String username="None";
             if (principal instanceof UserDetails) {
@@ -55,13 +58,22 @@ public class Logger {
             System.out.println("method name: "+joinpoint.getSignature().getName());
             String method_name=joinpoint.getSignature().getName();
             String action="None";
-            if(method_name.contains("insert"))
+            if(method_name.contains("insert")){
                 action = "insert";
-            else if(method_name.contains("update"))
+                System.out.println("arg1: "+joinpoint.getArgs()[0].toString());
+                
+            }
+            else if(method_name.contains("update")){
                 action = "update";
-            else if(method_name.contains("delete"))
+                System.out.println("arg1: "+joinpoint.getArgs()[0].toString());
+                String jsonInString = mapper.writeValueAsString(joinpoint.getArgs()[1]);
+                System.out.println("arg2: "+jsonInString);
+                
+            }
+            else if(method_name.contains("delete")){
                 action = "delete";
-            
+                System.out.println("arg1: "+joinpoint.getArgs()[0].toString());
+            }
             logDAO.insertLog(new CcloudsLogs(-1L, userId, null, action,table));
 
             } catch (IllegalAccessException ex) {
@@ -69,6 +81,8 @@ public class Logger {
             } catch (IllegalArgumentException ex) {
                 java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvocationTargetException ex) {
+                java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (JsonProcessingException ex) {
                 java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);
             }
             
