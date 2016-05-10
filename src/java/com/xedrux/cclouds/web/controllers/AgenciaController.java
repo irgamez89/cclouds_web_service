@@ -1,6 +1,6 @@
 package com.xedrux.cclouds.web.controllers;
 
-import com.xedrux.cclouds.web.dao.AgencialDAO;
+import com.xedrux.cclouds.web.dao.AgenciaDAO;
 import com.xedrux.cclouds.web.dao.CcloudsDAO;
 import com.xedrux.cclouds.web.dao.EmpresaDAO;
 import com.xedrux.cclouds.web.dao.SubEmpresaDAO;
@@ -36,7 +36,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AgenciaController {
 
     @Autowired
-    AgencialDAO agencialDAO;
+    AgenciaDAO agenciaDAO;
     @Autowired
     SucursalDAO sucursalDAO;
     @Autowired
@@ -44,12 +44,12 @@ public class AgenciaController {
     @Autowired
     EmpresaDAO empresaDAO;
 
-    public void setAgenciaDAO(AgencialDAO agencialDAO) {
-        this.agencialDAO = agencialDAO;
+    public void setAgenciaDAO(AgenciaDAO agenciaDAO) {
+        this.agenciaDAO = agenciaDAO;
     }
 
     public CcloudsDAO getDAO() {
-        return agencialDAO;
+        return agenciaDAO;
     }
 
     
@@ -57,7 +57,7 @@ public class AgenciaController {
     @RequestMapping(value = "/", method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> getAllAgencias() {
-        Collection<CcloudsAgencia> agencias = agencialDAO.getAllAgencias();
+        Collection<CcloudsAgencia> agencias = agenciaDAO.getAllAgencias();
         HashMap<String, Object> response = new HashMap<>();
         response.put("agencias", agencias);
         return response;
@@ -69,7 +69,7 @@ public class AgenciaController {
     public HashMap<String, Object> getAgencia(@ModelAttribute("id") Long id)
             throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
-        CcloudsAgencia agencia = agencialDAO.getAgencia(id);
+        CcloudsAgencia agencia = agenciaDAO.getAgencia(id);
         if (agencia != null) {
             response.put("agencia", agencia);
         } else {
@@ -85,11 +85,11 @@ public class AgenciaController {
             @ModelAttribute("id") Long id)
             throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
-        CcloudsAgencia agencia = agencialDAO.getAgencia(id);
+        CcloudsAgencia agencia = agenciaDAO.getAgencia(id);
         if (agencia != null) {
             CcloudsSucursal sucursal = sucursalDAO.getSucursal(agencia.getIdSucursal());
             List<CcloudsAgencia> agencias
-                    = agencialDAO.getAllAgenciasFrom(sucursal.getIdSucursal());
+                    = agenciaDAO.getAllAgenciasFrom(sucursal.getIdSucursal());
             CcloudsSubEmpresa subEmpresa
                     = subEmpresaDAO.getSubEmpresa(sucursal.getIdSubEmpresa());
             List<CcloudsSucursal> sucursales
@@ -119,7 +119,7 @@ public class AgenciaController {
             throws EntityNotFoundException {
         HashMap<String, Object> response = new HashMap<>();
         List<CcloudsAgencia> agencias
-                = agencialDAO.getAllAgenciasFrom(sucursal);
+                = agenciaDAO.getAllAgenciasFrom(sucursal);
         response.put("agencias", agencias);
         return response;
     }
@@ -138,7 +138,7 @@ public class AgenciaController {
                     + "There are wrong fields.",
                     result.getFieldErrors());
         } else {
-            long id = agencialDAO.insertAgencia(agencia);
+            long id = agenciaDAO.insertAgencia(agencia);
             response.put("id", id);
         }
         return response;
@@ -160,7 +160,7 @@ public class AgenciaController {
                     result.getFieldErrors());
         } else {
             agencia.setIdAgencia(id);
-            if (agencialDAO.updateAgencia(agencia)) {
+            if (agenciaDAO.updateAgencia(agencia)) {
                 response.put("success", true);
             } else {
                 throw new EntityNotFoundException("Agencia not found.");
@@ -174,7 +174,7 @@ public class AgenciaController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void deleteAgencia(@ModelAttribute("id") long id) throws
             EntityNotFoundException {
-        if (!agencialDAO.deleteAgencia(id)) {
+        if (!agenciaDAO.deleteAgencia(id)) {
             throw new EntityNotFoundException(
                     "Couldn't delete. " + MESSAGE + id);
         }
