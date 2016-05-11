@@ -12,6 +12,7 @@ import com.xedrux.cclouds.web.dao.LogDAO;
 import com.xedrux.cclouds.web.dao.UserDAO;
 import com.xedrux.cclouds.web.entities.CcloudsLogs;
 import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import org.aspectj.lang.JoinPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,7 @@ public class Logger {
         this.userDAO = userDAO;
     }
     
-    public void logAction(JoinPoint joinpoint, Object controllers){
+    public void logAction(JoinPoint joinpoint, Object controllers,Object retVal){
         try {
             ObjectMapper mapper = new ObjectMapper();
             System.out.println("method args: "+joinpoint.getArgs().length);
@@ -58,23 +59,32 @@ public class Logger {
             System.out.println("method name: "+joinpoint.getSignature().getName());
             String method_name=joinpoint.getSignature().getName();
             String action="None";
+            String json ="";
+            long id=-1;
             if(method_name.contains("insert")){
                 action = "insert";
-                System.out.println("arg1: "+joinpoint.getArgs()[0].toString());
-                
+                json = mapper.writeValueAsString(joinpoint.getArgs()[0]);
+                System.out.println("arg2: "+json);
+                System.out.println("retval: "+retVal);
+                HashMap<String,Object> response = (HashMap<String,Object>) retVal; 
+                id=(long) response.get("id");
+                System.out.println("id: "+id);
             }
             else if(method_name.contains("update")){
                 action = "update";
                 System.out.println("arg1: "+joinpoint.getArgs()[0].toString());
-                String jsonInString = mapper.writeValueAsString(joinpoint.getArgs()[1]);
-                System.out.println("arg2: "+jsonInString);
-                
+                json = mapper.writeValueAsString(joinpoint.getArgs()[1]);
+                System.out.println("arg2: "+json);
+                id=(long) joinpoint.getArgs()[0];
+
             }
             else if(method_name.contains("delete")){
                 action = "delete";
+                id=(long) joinpoint.getArgs()[0];
                 System.out.println("arg1: "+joinpoint.getArgs()[0].toString());
             }
-            logDAO.insertLog(new CcloudsLogs(-1L, userId, null, action,table));
+            logDAO.insertLog(new CcloudsLogs(-1L, userId, null, action,table,id,
+                    json));
 
             } catch (IllegalAccessException ex) {
                 java.util.logging.Logger.getLogger(Logger.class.getName()).log(Level.SEVERE, null, ex);

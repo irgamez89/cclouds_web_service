@@ -48,7 +48,7 @@ public class ModuleController {
                     result.getFieldErrors());
         } else {
             long id = moduleDAO.insertModule(module);
-            response.put("Id", id);
+            response.put("id", id);
         }
         return response;
     }

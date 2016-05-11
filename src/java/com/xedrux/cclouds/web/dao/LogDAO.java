@@ -45,16 +45,18 @@ public class LogDAO implements CcloudsDAO{
     public long insertLog(CcloudsLogs log) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         String template = "INSERT INTO %s (%s,"
-                + "  %s, %s )"
-                + "VALUES (?, ?, ?);";
+                + "  %s, %s, %s, %s )"
+                + "VALUES (?, ?, ?, ?, ?);";
         String INSERT_SQL = String.format(template, TABLE_NAME, 
-                ID_USER, ACCION, TABLE);
+                ID_USER, ACCION, TABLE, ID_REGISTRO, DESCRIPCION_OBJETO);
         
             dataSource.update((Connection connection) -> {
                 PreparedStatement ps = connection.prepareStatement(INSERT_SQL, new String[]{ID});
                 ps.setObject(1, log.getIdUser());
                 ps.setObject(2, log.getAccion());
                 ps.setObject(3, log.getTableName());
+                ps.setObject(4, log.getIdRegistro());
+                ps.setObject(5, log.getDescripcionObjeto());
                 return ps;
             }, keyHolder);
         
@@ -81,7 +83,9 @@ public class LogDAO implements CcloudsDAO{
                     rs.getLong(ID_USER),
                     rs.getTimestamp(DATE),
                     rs.getString(ACCION),
-                    rs.getString(TABLE)
+                    rs.getString(TABLE),
+                    rs.getLong(ID_REGISTRO),
+                    rs.getString(DESCRIPCION_OBJETO)
             );
             return log;
         }
@@ -92,4 +96,6 @@ public class LogDAO implements CcloudsDAO{
     String ID_USER = "id_user";
     String ACCION = "accion";
     String TABLE = "table_name";
+    String ID_REGISTRO = "id_registro";
+    String DESCRIPCION_OBJETO = "descripcion_objeto";
 }

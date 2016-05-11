@@ -19,15 +19,20 @@ public class CcloudsLogs implements Serializable {
     @Size(max = 255)
     private String tableName;
     private long idUser;
+    private long idRegistro;
+    String descripcionObjeto;
     public CcloudsLogs() {
     }
 
-    public CcloudsLogs(Long idLog,long idUser, Timestamp lastDate, String accion, String tableName) {
+    public CcloudsLogs(Long idLog,long idUser, Timestamp lastDate, String accion
+            , String tableName, long idRegistro,String descripcionEntidad) {
         this.idLog = idLog;
         this.idUser = idUser;
         this.lastDate = lastDate;
         this.accion = accion;
         this.tableName = tableName;
+        this.idRegistro = idRegistro;
+        this.descripcionObjeto = descripcionEntidad;
     }
 
     public Long getIdLog() {
@@ -69,6 +74,22 @@ public class CcloudsLogs implements Serializable {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public void setIdRegistro(long idRegistro) {
+        this.idRegistro = idRegistro;
+    }
+
+    public void setDescripcionObjeto(String descripcionObjeto) {
+        this.descripcionObjeto = descripcionObjeto;
+    }
+
+    public long getIdRegistro() {
+        return idRegistro;
+    }
+
+    public String getDescripcionObjeto() {
+        return descripcionObjeto;
     }
 
     @Override

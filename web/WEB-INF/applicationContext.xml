@@ -115,13 +115,13 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
         <aop:aspect id="myAspect" ref="myLogger">
             <aop:pointcut id="businessService"
                 expression="execution(* com.xedrux.cclouds.web.controllers.*.insert*(..)) &amp;&amp; this(controllers)"/>
-            <aop:after pointcut-ref="businessService" method="logAction"/>
+            <aop:after-returning pointcut-ref="businessService" returning="retVal" method="logAction"/>
             <aop:pointcut id="businessService1"
                 expression="execution(* com.xedrux.cclouds.web.controllers.*.update*(..)) &amp;&amp; this(controllers)"/>
-            <aop:after pointcut-ref="businessService1" method="logAction"/>
+            <aop:after-returning pointcut-ref="businessService1" returning="retVal" method="logAction"/>
             <aop:pointcut id="businessService2"
                 expression="execution(* com.xedrux.cclouds.web.controllers.*.delete*(..)) &amp;&amp; this(controllers)"/>
-            <aop:after pointcut-ref="businessService2" method="logAction"/>
+            <aop:after-returning pointcut-ref="businessService2" returning="retVal" method="logAction"/>
         </aop:aspect>
     </aop:config>
 </beans>

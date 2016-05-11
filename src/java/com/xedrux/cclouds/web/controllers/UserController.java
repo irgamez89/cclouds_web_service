@@ -136,7 +136,7 @@ public class UserController {
         } else {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             long id = userDAO.insertUser(user);
-            response.put("userId", id);
+            response.put("id", id);
         }
         return response;
     }
