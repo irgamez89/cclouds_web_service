@@ -37,7 +37,9 @@ public class ControllerExceptionHandler {
     public HashMap<String, Object> handleDuplicateKeyException(
             DuplicateKeyException exception) {
         HashMap<String, Object> response = new HashMap<>();
-        response.put("message", exception.getMessage());
+//        response.put("message", exception.getMessage());
+        response.put("message", "Ya existe un registro con datos iguales al que"
+                + " usted intentó insertar.");
         return response;
     }
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -46,7 +48,9 @@ public class ControllerExceptionHandler {
     public HashMap<String, Object> handleException(
             DataIntegrityViolationException exception) {
         HashMap<String, Object> response = new HashMap<>();
-        response.put("message", exception.getMessage());
+//        response.put("message", exception.getMostSpecificCause().getMessage());
+        response.put("message", "No puede eliminar esta entidad porque está "
+                + "referenciada por otras.");
         return response;
     }
 
