@@ -118,6 +118,11 @@ public class RolOptionDAO implements CcloudsDAO{
                 "=? AND "+ID_OPTIONS+"=?;";
         return (dataSource.update(DELETE_SQL, idRol,idOption) > 0);
     }
+    public Boolean removeAllOpiotionsFromRol(long idRol) {
+        String DELETE_SQL = "DELETE FROM " + TABLE_NAME + " WHERE " + ID_ROL +
+                "=?;";
+        return (dataSource.update(DELETE_SQL, idRol) > 0);
+    }
     private final class RolModuleMapper implements RowMapper<CcloudsRolOption> {
 
         public CcloudsRolOption mapRow(ResultSet rs, int rowNum) throws SQLException {

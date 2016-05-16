@@ -110,7 +110,7 @@ public class EmpresaDAO implements CcloudsDAO{
         public CcloudsEmpresa mapRow(ResultSet rs, int rowNum) throws SQLException {
             CcloudsEmpresa empresa = null;
             empresa = new CcloudsEmpresa(
-                    rs.getInt(ID),
+                    rs.getLong(ID),
                     rs.getString(NAME),
                     rs.getString(OBSERVACION),
                     rs.getInt(REPRESENTANTE),

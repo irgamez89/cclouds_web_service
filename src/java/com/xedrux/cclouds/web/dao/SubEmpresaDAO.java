@@ -127,7 +127,7 @@ public class SubEmpresaDAO implements  CcloudsDAO{
         public CcloudsSubEmpresa mapRow(ResultSet rs, int rowNum) throws SQLException {
             CcloudsSubEmpresa subEmpresa = null;
             subEmpresa = new CcloudsSubEmpresa(
-                    rs.getInt(ID),
+                    rs.getLong(ID),
                     rs.getString(NAME),
                     rs.getString(OBSERVACION),
                     rs.getInt(TIPO_NEGOCIO),

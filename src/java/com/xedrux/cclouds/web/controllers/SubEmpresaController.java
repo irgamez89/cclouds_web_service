@@ -110,7 +110,7 @@ public class SubEmpresaController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> updateSubEmpresa(
-            @ModelAttribute("Id") int id,
+            @ModelAttribute("Id") long id,
             @RequestBody @Valid CcloudsSubEmpresa subEmpresa,
             BindingResult result)
             throws EntityNotFoundException, UnableToCreateEntityException {

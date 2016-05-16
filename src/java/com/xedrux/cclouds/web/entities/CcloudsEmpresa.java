@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 
 public class CcloudsEmpresa implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Integer idEmpresa;
+    private Long idEmpresa;
     @Size(max = 255)
     private String nombreEmpresa;
     @Size(max = 500)
@@ -29,11 +29,11 @@ public class CcloudsEmpresa implements Serializable {
     public CcloudsEmpresa() {
     }
 
-    public CcloudsEmpresa(Integer idEmpresa) {
+    public CcloudsEmpresa(Long idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 
-    public CcloudsEmpresa(Integer idEmpresa, String nombreEmpresa, String observacionEmpresa, Integer idRepresentante, String rupEmpresa, Date fechaConstitucionEmpresa, String esloganEmpresa, String imagenLogoEmpresa) {
+    public CcloudsEmpresa(Long idEmpresa, String nombreEmpresa, String observacionEmpresa, Integer idRepresentante, String rupEmpresa, Date fechaConstitucionEmpresa, String esloganEmpresa, String imagenLogoEmpresa) {
         this.idEmpresa = idEmpresa;
         this.nombreEmpresa = nombreEmpresa;
         this.observacionEmpresa = observacionEmpresa;
@@ -44,11 +44,11 @@ public class CcloudsEmpresa implements Serializable {
         this.imagenLogoEmpresa = imagenLogoEmpresa;
     }
     
-    public Integer getIdEmpresa() {
+    public Long getIdEmpresa() {
         return idEmpresa;
     }
 
-    public void setIdEmpresa(Integer idEmpresa) {
+    public void setIdEmpresa(Long idEmpresa) {
         this.idEmpresa = idEmpresa;
     }
 

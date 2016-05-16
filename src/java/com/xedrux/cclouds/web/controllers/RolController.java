@@ -141,6 +141,7 @@ public class RolController {
         long new_id;
         if(!rolDAO.exists(id))
             throw new EntityNotFoundException(MESSAGE+id);
+        rolOptionDAO.removeAllOpiotionsFromRol(id);
         for (long option : options) {
             new_id = rolOptionDAO.insertRolOption(
                     new CcloudsRolOption(option, id));

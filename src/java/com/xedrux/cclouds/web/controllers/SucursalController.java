@@ -109,7 +109,7 @@ public class SucursalController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> updateSucursal(
-            @ModelAttribute("Id") int id,
+            @ModelAttribute("Id") long id,
             @RequestBody @Valid CcloudsSucursal sucursal,
             BindingResult result)
             throws EntityNotFoundException, UnableToCreateEntityException {

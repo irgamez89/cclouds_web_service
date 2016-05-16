@@ -86,7 +86,7 @@ public class EmpresaController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public HashMap<String, Object> updateEmpresa(
-            @ModelAttribute("Id") int id,
+            @ModelAttribute("Id") long id,
             @RequestBody @Valid CcloudsEmpresa empresa,
             BindingResult result)
             throws EntityNotFoundException, UnableToCreateEntityException {

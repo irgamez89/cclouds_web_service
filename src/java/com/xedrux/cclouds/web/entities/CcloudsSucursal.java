@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 public class CcloudsSucursal implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Integer idSucursal;
+    private Long idSucursal;
     @Size(max = 255)
     private String nombreSucursal;
     @Size(max = 500)
@@ -21,7 +21,7 @@ public class CcloudsSucursal implements Serializable {
     public CcloudsSucursal() {
     }
 
-    public CcloudsSucursal(Integer idSucursal, String nombreSucursal, String observacionSucursal, Integer idRepresentanteSucursal, long idSubEmpresa) {
+    public CcloudsSucursal(Long idSucursal, String nombreSucursal, String observacionSucursal, Integer idRepresentanteSucursal, long idSubEmpresa) {
         this.idSucursal = idSucursal;
         this.nombreSucursal = nombreSucursal;
         this.observacionSucursal = observacionSucursal;
@@ -29,15 +29,15 @@ public class CcloudsSucursal implements Serializable {
         this.idSubEmpresa = idSubEmpresa;
     }
 
-    public CcloudsSucursal(Integer idSucursal) {
+    public CcloudsSucursal(Long idSucursal) {
         this.idSucursal = idSucursal;
     }
 
-    public Integer getIdSucursal() {
+    public Long getIdSucursal() {
         return idSucursal;
     }
 
-    public void setIdSucursal(Integer idSucursal) {
+    public void setIdSucursal(Long idSucursal) {
         this.idSucursal = idSucursal;
     }
 

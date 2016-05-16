@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 public class CcloudsSubEmpresa implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private Integer idSubEmpresa;
+    private Long idSubEmpresa;
     @Size(max = 255)
     private String nombreSubEmpresa;
     @Size(max = 500)
@@ -31,11 +31,11 @@ public class CcloudsSubEmpresa implements Serializable {
     public CcloudsSubEmpresa() {
     }
 
-    public CcloudsSubEmpresa(Integer idSubEmpresa) {
+    public CcloudsSubEmpresa(Long idSubEmpresa) {
         this.idSubEmpresa = idSubEmpresa;
     }
 
-    public CcloudsSubEmpresa(Integer idSubEmpresa, String nombreSubEmpresa, String observacionSubEmpresa, Integer idTipoNegocioSubEmpresa, Integer idRepresentante1SubEmpresa, Integer idRepresentante2SubEmpresa, Date fechaConstitucionSubEmpresa, String esloganSubEmpresa, String imagenLogoSubEmpresa, long idEmpresa) {
+    public CcloudsSubEmpresa(Long idSubEmpresa, String nombreSubEmpresa, String observacionSubEmpresa, Integer idTipoNegocioSubEmpresa, Integer idRepresentante1SubEmpresa, Integer idRepresentante2SubEmpresa, Date fechaConstitucionSubEmpresa, String esloganSubEmpresa, String imagenLogoSubEmpresa, long idEmpresa) {
         this.idSubEmpresa = idSubEmpresa;
         this.nombreSubEmpresa = nombreSubEmpresa;
         this.observacionSubEmpresa = observacionSubEmpresa;
@@ -48,11 +48,11 @@ public class CcloudsSubEmpresa implements Serializable {
         this.idEmpresa = idEmpresa;
     }
 
-    public Integer getIdSubEmpresa() {
+    public Long getIdSubEmpresa() {
         return idSubEmpresa;
     }
 
-    public void setIdSubEmpresa(Integer idSubEmpresa) {
+    public void setIdSubEmpresa(Long idSubEmpresa) {
         this.idSubEmpresa = idSubEmpresa;
     }
 

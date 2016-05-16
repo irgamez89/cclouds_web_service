@@ -120,7 +120,7 @@ public class SucursalDAO implements  CcloudsDAO{
         public CcloudsSucursal mapRow(ResultSet rs, int rowNum) throws SQLException {
             CcloudsSucursal sucursal = null;
             sucursal = new CcloudsSucursal(
-                    rs.getInt(ID),
+                    rs.getLong(ID),
                     rs.getString(NAME),
                     rs.getString(OBSERVACION),
                     rs.getInt(REPRESENTATNTE1),
